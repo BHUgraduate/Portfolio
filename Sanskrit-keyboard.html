@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VaakBoard | Premium Sanskrit Keyboard</title>
+
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            deva: ['Noto Sans Devanagari', 'sans-serif'],
+          },
+          colors: {
+            appBg: 'var(--app-bg)',
+            panelBg: 'var(--panel-bg)',
+            keyBg: 'var(--key-bg)',
+            keyBgPress: 'var(--key-bg-press)',
+            keySpecial: 'var(--key-special)',
+            keySpecialPress: 'var(--key-special-press)',
+            borderMain: 'var(--border-main)',
+            textMain: 'var(--text-main)',
+            textMuted: 'var(--text-muted)',
+            accent: '#6366F1',
+          },
+          boxShadow: {
+            'key': '0 1px 1px 0 rgba(0,0,0,0.15)',
+            'key-press': '0 0 0 0 rgba(0,0,0,0)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Auto Light/Dark System */
+    :root {
+      /* Light Mode */
+      --app-bg: #F1F5F9;
+      --panel-bg: #FFFFFF;
+      --key-bg: #FFFFFF;
+      --key-bg-press: #E2E8F0;
+      --key-special: #CBD5E1;
+      --key-special-press: #94A3B8;
+      --border-main: #E2E8F0;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Dark Mode */
+        --app-bg: #080C14;
+        --panel-bg: #141E30;
+        --key-bg: #475569;
+        --key-bg-press: #334155;
+        --key-special: #1E293B;
+        --key-special-press: #0F172A;
+        --border-main: #1E2D45;
+        --text-main: #F8FAFC;
+        --text-muted: #94A3B8;
+      }
+    }
+
+    body {
+      background-color: var(--app-bg);
+      color: var(--text-main);
+      touch-action: manipulation; /* Prevents double-tap zoom */
+      overflow: hidden; /* Lock viewport for app feel */
+    }
+
+    /* Output Editor Styles */
+    #editor {
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    #editor:empty:before {
+      content: attr(data-placeholder);
+      color: var(--text-muted);
+    }
+    .cursor-blink {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background-color: var(--accent);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Key Interactions */
+    .vk-key {
+      transition: background-color 0.1s, transform 0.05s;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .vk-key:active {
+      transform: scale(0.95);
+      box-shadow: none;
+    }
+
+    /* Transliteration Preview (live buffer) */
+    .live-buffer {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(99, 102, 241, 0.4);
+      text-underline-offset: 4px;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col antialiased">
+
+  <!-- Top Navigation (App Header) -->
+  <header class="flex items-center justify-between px-4 py-4 bg-panelBg border-b border-borderMain shrink-0 shadow-sm z-10">
+    <a href="index.html" class="flex items-center gap-2 text-textMuted hover:text-accent transition-colors font-medium text-sm">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Portfolio
+    </a>
+    <div class="font-display font-bold text-lg tracking-tight">
+      VaakBoard <span class="text-accent text-sm font-sans bg-accent/10 px-2 py-0.5 rounded-md ml-1">Web</span>
+    </div>
+    <button id="btn-copy" class="text-sm font-semibold text-textMain bg-borderMain/50 hover:bg-borderMain px-3 py-1.5 rounded-lg transition-colors">
+      Copy Text
+    </button>
+  </header>
+
+  <!-- Main Output Area (Mimics a notes app or message area) -->
+  <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 flex justify-center">
+    <div class="w-full max-w-3xl">
+      <div 
+        id="editor" 
+        class="w-full h-full font-deva text-3xl sm:text-4xl md:text-5xl leading-tight focus:outline-none"
+        data-placeholder="Start typing in Latin or Devanagari..."
+      ><span class="cursor-blink"></span></div>
+    </div>
+  </main>
+
+  <!-- Keyboard & Controls Container -->
+  <section class="bg-panelBg border-t border-borderMain w-full pb-safe flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+    
+    <!-- Controls Bar (Suggestions & Modes) -->
+    <div class="flex items-center justify-between px-2 py-2 border-b border-borderMain">
+      
+      <!-- Input Mode Switcher -->
+      <div class="flex bg-appBg p-1 rounded-lg">
+        <button class="mode-btn active px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-colors" data-mode="latin">Latin → सं</button>
+        <button class="mode-btn px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-colors text-textMuted" data-mode="direct">Direct</button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-2">
+        <button id="btn-clear" class="px-3 py-1.5 text-xs sm:text-sm font-semibold text-red-500 bg-red-500/10 hover:bg-red-500/20 rounded-lg transition-colors">Clear</button>
+      </div>
+    </div>
+
+    <!-- The Virtual Keyboard -->
+    <div id="keyboard" class="w-full max-w-4xl mx-auto p-2 sm:p-3 flex flex-col gap-2">
+      <!-- Keyboard Rows injected via JS -->
+    </div>
+    
+    <!-- Safe area padding for mobile notches -->
+    <div class="h-2 sm:h-4"></div>
+  </section>
+
+  <!-- Hidden input to capture physical keyboard if needed -->
+  <input type="text" id="hidden-input" class="opacity-0 absolute -top-10" autocomplete="off" autocorrect="off" spellcheck="false">
+
+  <script>
+    /* =====================================================================
+       1. ROBUST TRANSLITERATION ENGINE (Harvard-Kyoto / IAST Mapping)
+       ===================================================================== */
+    
+    // Core maps. We use strict longest-match token parsing.
+    const mappings = {
+      // Consonants (mapped to base character + virama/halant)
+      consonants: {
+        'ksh':'क्ष्', 'shr':'श्र्', 'tr':'त्र्', 'gy':'ज्ञ्',
+        'kh':'ख्', 'gh':'घ्', 'ch':'छ्', 'jh':'झ्', 'Th':'ठ्', 'Dh':'ढ्', 'th':'थ्', 'dh':'ध्', 'ph':'फ्', 'bh':'भ्', 'sh':'ष्',
+        'k':'क्', 'g':'ग्', 'c':'च्', 'j':'ज्', 'T':'ट्', 'D':'ड्', 'N':'ण्', 't':'त्', 'd':'द्', 'n':'न्', 'p':'प्', 'b':'ब्', 'm':'म्',
+        'y':'य्', 'r':'र्', 'l':'ल्', 'v':'व्', 'w':'व्', 'S':'श्', 's':'स्', 'h':'ह्'
+      },
+      // Independent Vowels (Start of word or after another vowel)
+      indVowels: {
+        'aa':'आ', 'ii':'ई', 'uu':'ऊ', 'ai':'ऐ', 'au':'औ', 
+        'a':'अ', 'i':'इ', 'I':'ई', 'u':'उ', 'U':'ऊ', 'e':'ए', 'o':'ओ', 'R':'ऋ'
+      },
+      // Dependent Vowels / Matras (After a consonant)
+      depVowels: {
+        'aa':'ा', 'ii':'ी', 'uu':'ू', 'ai':'ै', 'au':'ौ', 
+        'a':'', /* removes halant */ 'i':'ि', 'I':'ी', 'u':'ु', 'U':'ू', 'e':'े', 'o':'ो', 'R':'ृ'
+      },
+      // Modifiers
+      modifiers: {
+        'M':'ं', 'H':'ः'
+      }
+    };
+
+    /**
+     * Engine: Transliterates a buffer of Latin characters into Devanagari.
+     * Uses state-tracking to perfectly handle viramas (halants) and vowel positioning.
+     */
+    function processLatin(text) {
+      if (!text) return "";
+      let result = '';
+      let i = 0;
+      let lastWasConsonant = false;
+
+      while (i < text.length) {
+        let matchLen = 0;
+        let type = '';
+        let val = '';
+
+        // Greedy match: Check 3-char, then 2-char, then 1-char tokens
+        for (let len = 3; len > 0; len--) {
+          if (i + len > text.length) continue;
+          let chunk = text.substr(i, len);
+          
+          if (mappings.consonants[chunk]) { val = mappings.consonants[chunk]; type = 'C'; matchLen = len; break; }
+          if (mappings.indVowels[chunk]) { val = chunk; type = 'V'; matchLen = len; break; }
+          if (mappings.modifiers[chunk]) { val = mappings.modifiers[chunk]; type = 'M'; matchLen = len; break; }
+        }
+
+        if (matchLen > 0) {
+          if (type === 'C') {
+            result += val;
+            lastWasConsonant = true;
+          } else if (type === 'V') {
+            if (lastWasConsonant) {
+              // Vowel follows a consonant: Remove the halant (last char of result) and add the Matra
+              result = result.slice(0, -1);
+              result += mappings.depVowels[val];
+            } else {
+              // Vowel follows a space or another vowel: Add independent vowel
+              result += mappings.indVowels[val];
+            }
+            lastWasConsonant = false;
+          } else if (type === 'M') {
+            result += val; // Add Anusvara/Visarga directly
+          }
+          i += matchLen;
+        } else {
+          // Unrecognized character (spaces, punctuation, numbers) - pass through exactly
+          result += text[i];
+          lastWasConsonant = false;
+          i++;
+        }
+      }
+      return result;
+    }
+
+    /* =====================================================================
+       2. STATE & UI MANAGEMENT
+       ===================================================================== */
+    
+    let state = {
+      mode: 'latin', // 'latin' or 'direct'
+      shift: false,
+      committedText: '',
+      liveBuffer: ''
+    };
+
+    const DOM = {
+      editor: document.getElementById('editor'),
+      keyboard: document.getElementById('keyboard'),
+      modeBtns: document.querySelectorAll('.mode-btn'),
+      btnClear: document.getElementById('btn-clear'),
+      btnCopy: document.getElementById('btn-copy'),
+      hiddenInput: document.getElementById('hidden-input')
+    };
+
+    // Keyboard Layout Definitions (Standard Mobile Style)
+    const layouts = {
+      latin: {
+        normal: [
+          ['q','w','e','r','t','y','u','i','o','p'],
+          ['a','s','d','f','g','h','j','k','l'],
+          ['{shift}', 'z','x','c','v','b','n','m', '{bksp}'],
+          ['{123}', ',', '{space}', '.', '{enter}']
+        ],
+        shift: [
+          ['Q','W','E','R','T','Y','U','I','O','P'],
+          ['A','S','D','F','G','H','J','K','L'],
+          ['{shift}', 'Z','X','C','V','B','N','M', '{bksp}'],
+          ['{123}', '!', '{space}', '?', '{enter}']
+        ]
+      },
+      direct: {
+        normal: [
+          ['औ','ऐ','आ','ई','ऊ','भ','ङ','घ','ध','झ'],
+          ['ओ','ए','अ','इ','उ','फ','र','ख','थ','छ'],
+          ['{shift}', 'प','र','क','त','च','ट', '{bksp}'],
+          ['{123}', 'ं', '{space}', '।', '{enter}']
+        ],
+        shift: [
+          ['ौ','ै','ा','ी','ू','ब','ग','ड','द','ज'],
+          ['ो','े','्','ि','ु','श','ष','स','ह','ळ'],
+          ['{shift}', 'ञ','ण','न','म','य','व', '{bksp}'],
+          ['{123}', 'ः', '{space}', '॥', '{enter}']
+        ]
+      }
+    };
+
+    /* =====================================================================
+       3. KEYBOARD RENDERING & LOGIC
+       ===================================================================== */
+
+    function renderKeyboard() {
+      const layoutSet = layouts[state.mode];
+      const rows = state.shift ? layoutSet.shift : layoutSet.normal;
+      
+      let html = '';
+      rows.forEach(row => {
+        html += `<div class="flex justify-center gap-1.5 sm:gap-2 w-full">`;
+        row.forEach(key => {
+          let classes = "vk-key flex items-center justify-center rounded-lg font-medium text-lg sm:text-xl shadow-key text-textMain bg-keyBg hover:bg-keyBgPress ";
+          let content = key;
+          let action = 'char';
+          let dataVal = key;
+
+          // Special Keys Handling
+          if (key.startsWith('{') && key.endsWith('}')) {
+            classes = "vk-key flex items-center justify-center rounded-lg font-medium text-sm sm:text-base shadow-key text-textMain bg-keySpecial hover:bg-keySpecialPress ";
+            action = key.replace(/[{}]/g, '');
+            
+            if (action === 'bksp') {
+              classes += "w-12 sm:w-16";
+              content = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg>`;
+            } else if (action === 'shift') {
+              classes += "w-12 sm:w-16 " + (state.shift ? "bg-accent text-white hover:bg-accent/80" : "");
+              content = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`;
+            } else if (action === 'space') {
+              classes += "flex-1 max-w-[200px] sm:max-w-[300px] text-sm text-textMuted";
+              content = state.mode === 'latin' ? 'Space (Commit)' : 'अन्तरालम्';
+            } else if (action === 'enter') {
+              classes += "w-14 sm:w-20 bg-accent text-white hover:bg-accent/80 shadow-none";
+              content = "Return";
+            } else if (action === '123') {
+              classes += "w-12 sm:w-16 text-sm";
+              content = "?123";
+            }
+          } else {
+            // Regular character keys
+            classes += "flex-1 max-w-[40px] sm:max-w-[50px] py-3 sm:py-4";
+            if (state.mode === 'direct') classes += " font-deva text-xl sm:text-2xl";
+          }
+
+          html += `<button class="${classes}" data-action="${action}" data-val="${dataVal}">${content}</button>`;
+        });
+        html += `</div>`;
+      });
+
+      DOM.keyboard.innerHTML = html;
+      bindKeyEvents();
+    }
+
+    function bindKeyEvents() {
+      const keys = DOM.keyboard.querySelectorAll('.vk-key');
+      keys.forEach(key => {
+        // Handle touch & click cleanly
+        key.addEventListener('pointerdown', (e) => {
+          e.preventDefault(); // Prevents focus loss
+          handleKeyAction(key.dataset.action, key.dataset.val);
+        });
+      });
+    }
+
+    /* =====================================================================
+       4. INPUT HANDLING
+       ===================================================================== */
+    
+    function handleKeyAction(action, val) {
+      if (action === 'char') {
+        if (state.mode === 'latin') {
+          // Add to live buffer for transliteration
+          state.liveBuffer += val;
+        } else {
+          // Direct insertion
+          state.committedText += val;
+        }
+      } else if (action === 'space') {
+        commitBuffer();
+        state.committedText += ' ';
+      } else if (action === 'enter') {
+        commitBuffer();
+        state.committedText += '\n';
+      } else if (action === 'bksp') {
+        if (state.liveBuffer.length > 0) {
+          state.liveBuffer = state.liveBuffer.slice(0, -1);
+        } else if (state.committedText.length > 0) {
+          state.committedText = state.committedText.slice(0, -1);
+        }
+      } else if (action === 'shift') {
+        state.shift = !state.shift;
+        renderKeyboard(); // Re-render to show shifted keys
+        return; // Skip output update
+      }
+
+      // Auto-reset shift for latin after char typing (like phones do)
+      if (action === 'char' && state.shift && state.mode === 'latin') {
+        state.shift = false;
+        renderKeyboard();
+      }
+
+      updateOutput();
+    }
+
+    function commitBuffer() {
+      if (state.liveBuffer) {
+        state.committedText += processLatin(state.liveBuffer);
+        state.liveBuffer = '';
+      }
+    }
+
+    function updateOutput() {
+      let html = state.committedText.replace(/\n/g, '<br>');
+      
+      if (state.liveBuffer) {
+        // Show the live transliterated preview
+        const preview = processLatin(state.liveBuffer);
+        html += `<span class="live-buffer">${preview}</span>`;
+      }
+      
+      html += `<span class="cursor-blink"></span>`;
+      DOM.editor.innerHTML = html;
+      
+      // Keep scroll at bottom
+      DOM.editor.parentElement.parentElement.scrollTop = DOM.editor.parentElement.parentElement.scrollHeight;
+    }
+
+    /* =====================================================================
+       5. PHYSICAL KEYBOARD & SYSTEM EVENTS
+       ===================================================================== */
+
+    // Listen to physical keyboard events
+    document.addEventListener('keydown', (e) => {
+      // Ignore if user is pressing modifiers like Ctrl/Cmd
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      
+      if (e.key === 'Backspace') {
+        handleKeyAction('bksp');
+      } else if (e.key === 'Enter') {
+        handleKeyAction('enter');
+      } else if (e.key === ' ') {
+        e.preventDefault(); // Stop page scrolling
+        handleKeyAction('space');
+      } else if (e.key.length === 1) { // Normal printable char
+        handleKeyAction('char', e.key);
+      }
+    });
+
+    // Handle Mode Switching
+    DOM.modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all
+        DOM.modeBtns.forEach(b => {
+          b.classList.remove('active', 'bg-panelBg', 'text-textMain', 'shadow-sm');
+          b.classList.add('text-textMuted');
+        });
+        
+        // Add active class to clicked
+        btn.classList.add('active', 'bg-panelBg', 'text-textMain', 'shadow-sm');
+        btn.classList.remove('text-textMuted');
+        
+        // Update State
+        commitBuffer(); // Commit any existing buffer before switching
+        state.mode = btn.dataset.mode;
+        state.shift = false;
+        renderKeyboard();
+        updateOutput();
+      });
+    });
+
+    // Clear Button
+    DOM.btnClear.addEventListener('click', () => {
+      state.committedText = '';
+      state.liveBuffer = '';
+      updateOutput();
+    });
+
+    // Copy Button (Clipboard)
+    DOM.btnCopy.addEventListener('click', () => {
+      commitBuffer();
+      updateOutput();
+      
+      // Create a temporary textarea to hold the text to copy
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = state.committedText;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      
+      try {
+        document.execCommand('copy');
+        const originalText = DOM.btnCopy.innerText;
+        DOM.btnCopy.innerText = 'Copied!';
+        DOM.btnCopy.classList.add('bg-emerald-500', 'text-white');
+        setTimeout(() => {
+          DOM.btnCopy.innerText = originalText;
+          DOM.btnCopy.classList.remove('bg-emerald-500', 'text-white');
+        }, 2000);
+      } catch (err) {
+        console.error('Copy failed');
+      }
+      
+      document.body.removeChild(tempTextArea);
+    });
+
+    // Initial setup
+    renderKeyboard();
+    updateOutput();
+  </script>
+</body>
+</html>
+
