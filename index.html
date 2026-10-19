@@ -1,779 +1,674 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abhishek Sharma | Founder, Builder, Linguist</title>
-  
-  <!-- Premium Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'media', // Auto day/night mode based on device settings
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Outfit', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            bg: 'var(--bg)',
-            surface: 'var(--surface)',
-            surface2: 'var(--surface2)',
-            border: 'var(--border)',
-            textmain: 'var(--text-main)',
-            textmuted: 'var(--text-muted)',
-            cardbg: 'var(--card-bg)',
-            accent: '#6366F1',
-            teal: '#2DD4BF',
-          },
-          animation: {
-            'float-slow': 'float 8s ease-in-out infinite',
-            'float-slower': 'float 12s ease-in-out infinite reverse',
-            'glow-pulse': 'glowPulse 3s infinite',
-            'spin-slow': 'spin 15s linear infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-15px)' },
-            },
-            glowPulse: {
-              '0%, 100%': { opacity: 0.5, transform: 'scale(1)' },
-              '50%': { opacity: 0.9, transform: 'scale(1.05)' },
-            }
-          }
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js')</script>
+
+  <title>Abhishek Sharma — Founder @ Hycyon · Full-Stack &amp; iOS Engineer</title>
+  <meta name="description" content="Abhishek Sharma is the founder of Hycyon: a full-stack engineer and iOS developer building software where Sanskrit and language meet computation. VaakBoard, BrainSparkOS, Ebook Pro.">
+  <meta name="author" content="Abhishek Sharma">
+  <meta name="theme-color" content="#080C14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://portfolio.hycyon.com/">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Abhishek Sharma">
+  <meta property="og:title" content="Abhishek Sharma — Founder @ Hycyon">
+  <meta property="og:description" content="Founder. Builder. Engineer. Linguist. Software at the intersection of ancient language and computation.">
+  <meta property="og:url" content="https://portfolio.hycyon.com/">
+  <meta property="og:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abhishek Sharma — Founder, Builder, Engineer, Linguist">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abhishek Sharma — Founder @ Hycyon">
+  <meta name="twitter:description" content="Software at the intersection of ancient language and computation.">
+  <meta name="twitter:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://portfolio.hycyon.com/#person",
+        "name": "Abhishek Sharma",
+        "url": "https://portfolio.hycyon.com/",
+        "image": "https://portfolio.hycyon.com/assets/img/abhishek.jpg",
+        "jobTitle": "Founder, Full-Stack Engineer & iOS Developer",
+        "worksFor": { "@type": "Organization", "name": "Hycyon" },
+        "description": "Founder of Hycyon. Builds software at the intersection of Sanskrit, language and computation.",
+        "knowsAbout": ["Full-stack web development", "iOS development", "Sanskrit", "Transliteration", "Machine learning"],
+        "sameAs": [
+          "https://linkedin.com/in/bhugraduate",
+          "https://github.com/BHUgraduate",
+          "https://www.youtube.com/@%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%83%E0%A4%A4%E0%A4%B8%E0%A5%8D%E0%A4%AF%E0%A4%9B%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%83"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://portfolio.hycyon.com/#website",
+        "url": "https://portfolio.hycyon.com/",
+        "name": "Abhishek Sharma",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://portfolio.hycyon.com/#person" }
       }
-    }
+    ]
+  }
   </script>
 
-  <style>
-    /* Auto Day/Night Theme Variables */
-    :root {
-      /* Light Mode */
-      --bg: #F8FAFC;
-      --surface: #FFFFFF;
-      --surface2: #F1F5F9;
-      --border: #E2E8F0;
-      --text-main: #0F172A;
-      --text-muted: #64748B;
-      --card-bg: rgba(255, 255, 255, 0.7);
-      --noise-blend: multiply;
-      --noise-opacity: 0.04;
-      --hero-grad-start: #1E293B;
-      --hero-grad-end: #475569;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      :root {
-        /* Dark Mode */
-        --bg: #080C14;
-        --surface: #0F1624;
-        --surface2: #141E30;
-        --border: #1E2D45;
-        --text-main: #E8EDF5;
-        --text-muted: #94A3B8;
-        --card-bg: rgba(15, 22, 36, 0.6);
-        --noise-blend: screen;
-        --noise-opacity: 0.03;
-        --hero-grad-start: #FFFFFF;
-        --hero-grad-end: #94A3B8;
-      }
-    }
-    
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/img/abhishek-360.webp" type="image/webp" imagesrcset="assets/img/abhishek-360.webp 360w, assets/img/abhishek-715.webp 715w" imagesizes="(min-width:1024px) 352px, 260px">
 
-    /* Premium Noise Texture Overlay */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 50; 
-      mix-blend-mode: var(--noise-blend);
-      opacity: var(--noise-opacity);
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-    /* Gradients */
-    .grad-text {
-      background: linear-gradient(135deg, #6366F1 0%, #2DD4BF 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .grad-bg { background: linear-gradient(135deg, #6366F1, #4F46E5); }
-    .hero-text-grad {
-      background: linear-gradient(135deg, var(--hero-grad-start) 0%, var(--hero-grad-end) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    
-    /* Scroll Reveal */
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .delay-100 { transition-delay: 100ms; }
-    .delay-200 { transition-delay: 200ms; }
-    .delay-300 { transition-delay: 300ms; }
-
-    /* Glass Timeline Styles */
-    .timeline-wrapper { position: relative; padding: 20px 0; --progress: 0%; }
-    .timeline-spine {
-      position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
-      transform: translateX(-50%); background: var(--border); z-index: 0;
-    }
-    .timeline-spine::after {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: var(--progress);
-      background: linear-gradient(to bottom, #6366F1, #2DD4BF);
-      box-shadow: 0 0 15px rgba(99,102,241,0.6);
-      transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .timeline-node { display: grid; grid-template-columns: 1fr 64px 1fr; margin-bottom: 24px; position: relative; z-index: 1; }
-    .node-trigger { display: flex; justify-content: center; padding-top: 14px; grid-column: 2; grid-row: 1; z-index: 2; }
-    .node-ring {
-      width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 2px solid var(--border);
-      display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: bold;
-      font-size: 14px; color: var(--text-main); cursor: pointer; transition: all 0.4s ease;
-    }
-    .timeline-card {
-      background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border);
-      border-radius: 16px; padding: 24px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(99,102,241,0.12); border-color: rgba(99,102,241,0.4); }
-    .left-card { grid-column: 1; grid-row: 1; margin-right: 32px; }
-    .right-card { grid-column: 3; grid-row: 1; margin-left: 32px; }
-    .card-content { overflow: hidden; visibility: hidden; max-height: 0; opacity: 0; will-change: max-height, opacity; }
-    
-    /* Timeline Active States */
-    .timeline-node.node-active .node-ring {
-      background: var(--node-color); border-color: var(--node-color); color: white;
-      box-shadow: 0 0 0 6px rgba(99,102,241,0.15), 0 0 20px rgba(99,102,241,0.4);
-    }
-    .timeline-node.node-completed .node-ring {
-      background: #2DD4BF; border-color: #2DD4BF; color: white;
-      box-shadow: 0 0 0 4px rgba(45,212,191,0.15), 0 0 14px rgba(45,212,191,0.3);
-    }
-    .timeline-node.node-active .timeline-card { border-color: var(--node-color); box-shadow: 0 8px 32px rgba(99,102,241,0.15); }
-
-    /* Responsive Overrides */
-    @media (max-width: 768px) {
-      .timeline-spine { left: 24px; transform: none; }
-      .timeline-node { display: flex; flex-direction: column; padding-left: 64px; gap: 0; }
-      .node-trigger { position: absolute; left: 0; top: 0; padding-top: 16px; }
-      .node-ring { width: 40px; height: 40px; font-size: 12px; }
-      .left-card, .right-card { margin: 0 0 16px 0; width: 100%; grid-column: 1; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="modulepreload" href="assets/js/main.js">
+  <link rel="modulepreload" href="assets/js/nav.js">
+  <link rel="modulepreload" href="assets/js/reveal.js">
+  <link rel="modulepreload" href="assets/js/effects.js">
+  <link rel="modulepreload" href="assets/js/story.js">
+  <link rel="modulepreload" href="assets/js/vaak.js">
+  <link rel="modulepreload" href="assets/js/quiz.js">
+  <link rel="modulepreload" href="assets/js/reader.js">
+  <link rel="modulepreload" href="assets/js/contact.js">
+  <link rel="modulepreload" href="assets/js/translit.js">
+  <link rel="modulepreload" href="assets/js/env.js">
+  <noscript><style>.js .reveal{opacity:1;transform:none}</style></noscript>
 </head>
-<body class="antialiased selection:bg-accent/30 selection:text-accent">
+<body class="antialiased font-sans selection:bg-accent/30">
 
-  <!-- Background Ambient Orbs -->
-  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div class="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-accent/10 blur-[100px] animate-float-slow"></div>
-    <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-teal/10 blur-[120px] animate-float-slower"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Ambient orbs (decorative) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div class="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-accent/10 blur-[100px] animate-float-slow will-change-transform"></div>
+    <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-teal/10 blur-[120px] animate-float-slower will-change-transform"></div>
   </div>
 
-  <!-- Navbar -->
-  <nav id="navbar" class="fixed top-0 w-full z-40 transition-all duration-300 py-4 px-4 sm:px-6">
-    <div id="nav-content" class="max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-300 border border-transparent">
-      <a href="#home" class="font-display font-extrabold text-xl md:text-2xl tracking-tight z-50">
+  <!-- Navigation -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-40 py-3 px-4 sm:px-6">
+    <nav id="nav-content" aria-label="Primary" class="max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-2.5 flex items-center justify-between transition-all duration-300 border border-transparent">
+      <a href="#home" class="font-display font-black text-xl md:text-2xl tracking-tight py-2" aria-label="Abhishek Sharma — back to top">
         <span class="grad-text">Abhishek</span><span class="text-textmain ml-1">Sharma</span>
       </a>
-      
-      <!-- Desktop Nav -->
-      <div class="hidden md:flex items-center gap-2 bg-surface/50 backdrop-blur-md border border-border px-2 py-1 rounded-full shadow-sm">
-        <a href="#home" class="px-5 py-2 text-sm font-semibold text-textmuted hover:text-textmain hover:bg-border/50 rounded-full transition-colors">Home</a>
-        <a href="#projects" class="px-5 py-2 text-sm font-semibold text-textmuted hover:text-textmain hover:bg-border/50 rounded-full transition-colors">Projects</a>
-        <a href="#journey" class="px-5 py-2 text-sm font-semibold text-textmuted hover:text-textmain hover:bg-border/50 rounded-full transition-colors">Journey</a>
-        <a href="#contact" class="px-5 py-2 text-sm font-semibold text-textmuted hover:text-textmain hover:bg-border/50 rounded-full transition-colors">Contact</a>
+
+      <div class="hidden lg:flex items-center gap-1 bg-surface/50 border border-border px-2 py-1 rounded-full shadow-sm backdrop-blur-md">
+        <a href="#home" class="nav-link" data-spy="home">Home</a>
+        <a href="#work" class="nav-link" data-spy="work">Work</a>
+        <a href="#story" class="nav-link" data-spy="story">Story</a>
+        <a href="#capabilities" class="nav-link" data-spy="capabilities">Capabilities</a>
+        <a href="#hycyon" class="nav-link" data-spy="hycyon">Hycyon</a>
+        <a href="#contact" class="nav-link" data-spy="contact">Contact</a>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 text-textmuted hover:text-textmain border border-border rounded-lg bg-surface/50 z-50">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <button id="menu-btn" type="button" class="lg:hidden inline-flex items-center justify-center w-11 h-11 text-textmain border border-border rounded-xl bg-surface/60" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg class="icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        <svg class="icon-close hidden" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-    </div>
+    </nav>
 
-    <!-- Mobile Nav Dropdown -->
-    <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 sm:left-6 sm:right-6 bg-surface/95 backdrop-blur-xl border border-border rounded-2xl p-4 shadow-2xl">
-      <div class="flex flex-col gap-2">
-        <a href="#home" class="mobile-link px-4 py-3 text-sm font-bold text-textmain hover:bg-border/50 rounded-xl">Home</a>
-        <a href="#projects" class="mobile-link px-4 py-3 text-sm font-bold text-textmain hover:bg-border/50 rounded-xl">Projects</a>
-        <a href="#journey" class="mobile-link px-4 py-3 text-sm font-bold text-textmain hover:bg-border/50 rounded-xl">Journey</a>
-        <a href="#contact" class="mobile-link px-4 py-3 text-sm font-bold text-textmain hover:bg-border/50 rounded-xl">Contact</a>
-      </div>
+    <div id="mobile-menu" hidden class="lg:hidden absolute top-[4.25rem] left-4 right-4 sm:left-6 sm:right-6 bg-surface/95 backdrop-blur-xl border border-border rounded-2xl p-2 shadow-2xl">
+      <ul class="flex flex-col">
+        <li><a href="#home" data-spy="home" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Home</a></li>
+        <li><a href="#work" data-spy="work" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Work</a></li>
+        <li><a href="#story" data-spy="story" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Story</a></li>
+        <li><a href="#capabilities" data-spy="capabilities" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Capabilities</a></li>
+        <li><a href="#hycyon" data-spy="hycyon" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Hycyon</a></li>
+        <li><a href="#contact" data-spy="contact" class="flex items-center min-h-[48px] px-4 text-sm font-bold text-textmain rounded-xl hover:bg-border/50">Contact</a></li>
+      </ul>
     </div>
-  </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 z-10">
-    <div class="max-w-7xl w-full mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-8">
-      
-      <!-- Text Content -->
+  <main id="main">
+
+  <!-- ═════════════ 1 · WHO IS THIS ═════════════ -->
+  <section id="home" aria-labelledby="hero-title" class="relative min-h-[100svh] flex items-center justify-center pt-24 pb-12 px-5 sm:px-6 z-10">
+    <div class="max-w-7xl w-full mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-8">
+
       <div class="flex-1 text-center lg:text-left reveal">
-        
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
-          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-surface/60 border border-border backdrop-blur-md shadow-sm">
-            <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981] animate-glow-pulse"></div>
+          <a href="#hycyon" class="inline-flex items-center gap-3 px-4 min-h-[40px] rounded-full bg-surface/60 border border-border backdrop-blur-md shadow-sm hover:border-accent transition-colors">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981] animate-glow-pulse" aria-hidden="true"></span>
             <span class="font-mono text-[11px] sm:text-xs text-textmuted uppercase tracking-widest font-bold">Founder @ Hycyon</span>
-          </div>
-          <a href="https://youtube.com/@संस्कृतस्यछात्रः" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 backdrop-blur-md shadow-sm hover:bg-red-500/20 transition-colors">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-            <span class="font-mono text-[11px] sm:text-xs font-bold">@संस्कृतस्यछात्रः</span>
+          </a>
+          <a href="https://www.youtube.com/@%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%83%E0%A4%A4%E0%A4%B8%E0%A5%8D%E0%A4%AF%E0%A4%9B%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%83" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 min-h-[40px] rounded-full bg-red-500/10 border border-red-500/20 text-red-700 dark:text-red-400 hover:bg-red-500/20 transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            <span class="font-mono text-[11px] sm:text-xs font-bold">YouTube · <span lang="sa">संस्कृतस्यछात्रः</span></span>
+            <span class="sr-only">(opens in a new tab)</span>
           </a>
         </div>
-        
-        <p class="font-display text-lg md:text-xl text-textmuted mb-2 tracking-wide font-medium">Hi, I'm</p>
-        
-        <h1 class="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-tight mb-6 hero-text-grad leading-[1.1]">
+
+        <h1 id="hero-title" class="font-display font-black text-[2.6rem] min-[400px]:text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-tight mb-4 hero-text-grad leading-[1.08]">
           Abhishek Sharma
         </h1>
-        
-        <p class="text-base sm:text-lg md:text-xl text-textmuted max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-10 font-medium">
-          Tech Giant Founder · Full-Stack Engineer · iOS Developer · AI/ML Builder.<br class="hidden lg:block">
-          Crafting modern tools at the intersection of <span class="grad-text font-bold">ancient language & computation.</span>
+
+        <p class="role-line font-display font-bold text-xl sm:text-2xl md:text-3xl text-textmain mb-5 tracking-tight">
+          <span>Founder</span><span class="ml-2">Builder</span><span class="ml-2">Engineer</span><span class="ml-2 grad-text">Linguist</span>
         </p>
-        
-        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-          <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl grad-bg text-white font-display font-bold text-sm shadow-[0_4px_24px_rgba(99,102,241,0.3)] hover:shadow-[0_8px_32px_rgba(99,102,241,0.5)] hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
-            View Featured Work
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+
+        <p class="text-base sm:text-lg md:text-xl text-textmuted max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-8 font-medium">
+          I build modern tools at the intersection of <span class="grad-text font-bold">ancient language &amp; computation</span>: a native iOS keyboard for Sanskrit, web platforms and AI-powered software.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8">
+          <a href="#work" class="btn btn-primary magnetic w-full sm:w-auto">
+            View work
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
           </a>
-          <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-surface/50 border border-border text-textmain font-display font-bold text-sm hover:border-accent hover:text-accent hover:-translate-y-1 transition-all flex items-center justify-center backdrop-blur-sm">
-            Get in Touch
-          </a>
+          <a href="#contact" class="btn btn-ghost magnetic w-full sm:w-auto">Let’s talk</a>
         </div>
+
+        <p class="font-mono text-[11px] sm:text-xs text-textmuted tracking-wide">
+          <span class="font-bold uppercase tracking-widest">Shipped</span>
+          <span class="mx-2 opacity-50" aria-hidden="true">/</span><a class="inline-block py-2 underline decoration-border underline-offset-4 hover:text-textmain" href="#vaakboard">VaakBoard</a> (iOS)
+          <span class="mx-2 opacity-50" aria-hidden="true">/</span><a class="inline-block py-2 underline decoration-border underline-offset-4 hover:text-textmain" href="#brainspark">BrainSparkOS</a> (web)
+          <span class="mx-2 opacity-50" aria-hidden="true">/</span><a class="inline-block py-2 underline decoration-border underline-offset-4 hover:text-textmain" href="#ebookpro">Ebook Pro</a> (web)
+        </p>
       </div>
 
-      <!-- Profile Image Integration -->
       <div class="flex-1 flex justify-center lg:justify-end reveal delay-100">
-        <div class="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] animate-float-slow shrink-0">
-          <!-- Animated glowing ring backdrop -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-accent to-teal rounded-full animate-spin-slow opacity-60 blur-2xl"></div>
-          
-          <!-- Image Container -->
-          <div class="absolute inset-4 bg-surface border border-border/50 rounded-full p-2 shadow-2xl backdrop-blur-xl">
+        <div class="relative w-[11.5rem] h-[11.5rem] min-[400px]:w-56 min-[400px]:h-56 sm:w-72 sm:h-72 lg:w-[400px] lg:h-[400px] animate-float-slow shrink-0">
+          <div class="hero-ring absolute inset-0 bg-gradient-to-tr from-accent to-teal rounded-full animate-spin-slow opacity-60 blur-2xl" aria-hidden="true"></div>
+          <div class="absolute inset-3 sm:inset-4 bg-surface border border-border/50 rounded-full p-1.5 sm:p-2 shadow-2xl">
             <div class="w-full h-full rounded-full overflow-hidden relative bg-surface2">
-              <img src="image.png" alt="Abhishek Sharma" class="w-full h-full object-cover object-[center_35%] transition-transform duration-700 hover:scale-105" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%2364748B\'%3E%3Cpath d=\'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z\'/%3E%3C/svg%3E'"/>
-              <!-- Inner shadow for depth -->
+              <picture>
+                <source type="image/webp" srcset="assets/img/abhishek-360.webp 360w, assets/img/abhishek-715.webp 715w" sizes="(min-width:1024px) 352px, 260px">
+                <img src="assets/img/abhishek.jpg" width="715" height="715" alt="Portrait of Abhishek Sharma" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-[center_35%]">
+              </picture>
               <div class="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.2)] pointer-events-none"></div>
             </div>
           </div>
-          
-          <!-- Decorative geometric accents -->
-          <div class="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-xl rotate-12 flex items-center justify-center text-accent font-display font-bold">⌘</div>
-          <div class="absolute -bottom-0 -left-0 sm:-bottom-2 sm:-left-2 w-8 h-8 sm:w-10 sm:h-10 bg-teal/20 backdrop-blur-md border border-teal/30 rounded-full flex items-center justify-center text-teal font-display font-bold">✨</div>
+          <div class="absolute -top-1 -right-1 sm:-top-3 sm:-right-3 w-10 h-10 sm:w-12 sm:h-12 bg-accent/20 backdrop-blur-md border border-accent/30 rounded-xl rotate-12 flex items-center justify-center text-accent-ink font-display font-bold text-lg" aria-hidden="true">⌘</div>
+          <div class="absolute bottom-1 left-0 sm:-bottom-1 sm:-left-2 w-9 h-9 sm:w-11 sm:h-11 bg-teal/20 backdrop-blur-md border border-teal/30 rounded-full flex items-center justify-center text-teal-ink font-deva font-bold" aria-hidden="true">अ</div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Projects Section (Premium Bento Grid) -->
-  <section id="projects" class="relative py-20 sm:py-24 px-4 sm:px-6 z-10">
+  <!-- ═════════════ 3 · WHAT HAS HE BUILT ═════════════ -->
+  <section id="work" aria-labelledby="work-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-12 sm:mb-16 reveal">
-        <span class="inline-block font-mono text-xs text-accent font-bold tracking-[0.2em] px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full mb-4">PORTFOLIO</span>
-        <h2 class="font-display font-black text-3xl sm:text-4xl md:text-5xl text-textmain">Featured Projects</h2>
+        <span class="eyebrow eyebrow-accent">WORK</span>
+        <h2 id="work-title" class="section-title mb-4">Products I’ve built and shipped</h2>
+        <p class="section-lede mx-auto">Each one below is live. Try the previews. They’re small, and they behave like the real thing.</p>
       </div>
 
-      <!-- Responsive Grid: 1 col on mobile, 2 on tablet, 3 on desktop -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Project 1: VaakBoard (Spans 2 cols on Desktop) -->
-        <div class="group md:col-span-2 lg:col-span-2 bg-cardbg backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 md:p-10 hover:border-accent/50 transition-colors reveal delay-100 flex flex-col justify-between min-h-[380px] shadow-sm">
-          <div>
-            <div class="flex justify-between items-start mb-6">
-              <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 text-accent flex items-center justify-center text-2xl sm:text-3xl font-bold font-display border border-accent/20 shadow-inner">
-                वा
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- VaakBoard -->
+        <article id="vaakboard" class="card group lg:col-span-2 p-6 sm:p-8 md:p-10 reveal" data-spotlight>
+          <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 text-accent-ink flex items-center justify-center text-2xl sm:text-3xl font-bold font-deva border border-accent/20 shadow-inner" aria-hidden="true">वा</div>
+                <div>
+                  <p class="meta-label">Language technology · iOS</p>
+                  <span class="badge mt-2 bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>On the App Store</span>
+                </div>
               </div>
-              <span class="px-3 sm:px-4 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 rounded-full font-mono text-[10px] sm:text-xs font-bold flex items-center gap-2">
-                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></span> App Store Live
-              </span>
+              <h3 class="font-display font-bold text-3xl sm:text-4xl text-textmain mb-4">VaakBoard</h3>
+              <p class="text-textmain text-base sm:text-lg font-medium leading-relaxed mb-3 max-w-xl">
+                Typing Sanskrit on a phone is slow. VaakBoard is a native iOS keyboard that turns Latin input into Devanāgarī as you type.
+              </p>
+              <p class="text-textmuted text-sm sm:text-base leading-relaxed mb-6 max-w-xl font-medium">
+                IAST transliteration, phonetic input-to-Devanāgarī mapping and a full offline Sanskrit lexicon, built in Swift around a custom trie engine.
+              </p>
+              <ul class="flex flex-wrap gap-2 mb-8" aria-label="Technologies">
+                <li class="chip">Swift</li><li class="chip">CoreData</li><li class="chip">App Extension</li>
+              </ul>
+              <a href="sanskrit-keyboard.html" class="btn btn-primary btn-sm w-full sm:w-auto">
+                Open the full web demo
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
             </div>
-            <h3 class="font-display font-bold text-2xl sm:text-3xl text-textmain mb-3 sm:mb-4 group-hover:text-accent transition-colors">VaakBoard</h3>
-            <p class="text-textmuted text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mb-6 sm:mb-8 font-medium">
-              The first native iOS keyboard with IAST transliteration, phonetic input-to-Devanāgarī mapping, and a full offline Sanskrit lexicon. Built entirely in Swift with a custom trie-engine.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6 sm:mb-8">
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">Swift</span>
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">CoreData</span>
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">App Extension</span>
+
+            <!-- Live transliteration preview: runs the same mapping as the web demo -->
+            <div class="rounded-2xl border border-border bg-surface2/60 p-4 sm:p-6" data-vaak>
+              <div class="flex items-center justify-between mb-4">
+                <p class="meta-label" id="vaak-label">Live preview · try typing</p>
+                <button type="button" class="link-quiet !min-h-[32px] no-underline hover:underline" data-vaak-replay>Replay</button>
+              </div>
+              <label for="vaak-input" class="sr-only">Type Latin letters, for example saMskRtam</label>
+              <input id="vaak-input" type="text" value="saMskRtam" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="vaak-hint vaak-out" class="field font-mono !text-base mb-3" data-vaak-input>
+              <div class="flex flex-wrap gap-1.5 min-h-[2.4rem] mb-4" aria-hidden="true" data-vaak-keys></div>
+              <div class="rounded-xl bg-surface border border-border px-4 py-5 sm:py-6 text-center">
+                <p id="vaak-out" class="deva-out font-bold text-4xl sm:text-5xl text-textmain leading-tight break-words min-h-[1.3em]" lang="sa" aria-live="polite" data-vaak-out>संस्कृतम्</p>
+              </div>
+              <p id="vaak-hint" class="mt-3 text-xs text-textmuted font-medium leading-relaxed">
+                Try: <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="sarasvatii">sarasvatii</button>,
+                <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="bhaaratam">bhaaratam</button>,
+                <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="dharmakshetre">dharmakshetre</button>.
+                Case matters: <span class="font-mono font-bold">M</span> adds ◌ं, <span class="font-mono font-bold">R</span> gives ऋ, <span class="font-mono font-bold">T D N</span> are retroflex.
+              </p>
             </div>
           </div>
-          <a href="sanskrit-keyboard.html" class="inline-flex items-center justify-center sm:justify-start gap-2 text-accent font-bold text-sm hover:gap-3 transition-all w-full sm:w-fit bg-accent/10 px-6 py-3 rounded-xl border border-accent/20">
-            Explore Demo & Download
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </article>
+
+        <!-- BrainSparkOS -->
+        <article id="brainspark" class="card group p-6 sm:p-8 flex flex-col reveal delay-100" data-spotlight>
+          <div class="flex items-center gap-4 mb-5">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-ink flex items-center justify-center border border-amber-500/20 shadow-inner" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+            </div>
+            <div>
+              <p class="meta-label">EdTech · Web</p>
+              <span class="badge mt-2 bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Live</span>
+            </div>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-textmain mb-3">BrainSparkOS</h3>
+          <p class="text-textmain text-base font-medium leading-relaxed mb-2">A quiz platform built to make practice feel like play.</p>
+          <p class="text-textmuted text-sm leading-relaxed mb-5 font-medium">Gamified rounds, leaderboards and a dynamic question engine for students.</p>
+
+          <!-- Quiz interaction sketch -->
+          <div class="rounded-2xl border border-border bg-surface2/60 p-4 mb-5" data-quiz>
+            <div class="flex items-center justify-between mb-3">
+              <p class="meta-label">Interaction sketch</p>
+              <p class="font-mono text-xs font-bold text-amber-ink" aria-live="polite">Score <span data-quiz-score>0</span>/<span data-quiz-total>0</span></p>
+            </div>
+            <p id="quiz-q" class="font-display font-bold text-base text-textmain mb-3" data-quiz-q>Which data structure powers VaakBoard’s lookup engine?</p>
+            <div role="group" aria-labelledby="quiz-q" class="grid gap-2" data-quiz-opts></div>
+            <p class="mt-3 text-xs font-medium text-textmuted min-h-[1.25rem]" aria-live="polite" data-quiz-msg></p>
+          </div>
+
+          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">React</li><li class="chip">Gamification</li></ul>
+          <a href="https://brainsparkos.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-sm mt-auto w-full bg-amber-500/10 border border-amber-500/25 text-amber-ink hover:bg-amber-500/20">
+            Open BrainSparkOS <span class="sr-only">(opens in a new tab)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </article>
+
+        <!-- Ebook Pro -->
+        <article id="ebookpro" class="card group p-6 sm:p-8 flex flex-col reveal delay-200" data-spotlight>
+          <div class="flex items-center gap-4 mb-5">
+            <div class="w-12 h-12 rounded-2xl bg-teal/10 text-teal-ink flex items-center justify-center border border-teal/20 shadow-inner" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div>
+              <p class="meta-label">Reading &amp; publishing · Web</p>
+              <span class="badge mt-2 bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Live</span>
+            </div>
+          </div>
+          <h3 class="font-display font-bold text-2xl text-textmain mb-3">Ebook Pro</h3>
+          <p class="text-textmain text-base font-medium leading-relaxed mb-2">A web app for reading and publishing digital books.</p>
+          <p class="text-textmuted text-sm leading-relaxed mb-5 font-medium">Built to make long-form reading comfortable and give literature one clean place to live.</p>
+
+          <!-- Reader interaction sketch -->
+          <div class="rounded-2xl border border-border bg-surface2/60 p-4 mb-5" data-reader>
+            <div class="flex items-center justify-between mb-3">
+              <p class="meta-label">Interaction sketch · tap a sentence</p>
+              <p class="font-mono text-xs font-bold text-teal-ink" aria-live="polite">Page <span data-reader-pos>1/2</span></p>
+            </div>
+            <div class="reader-page reader-text rounded-xl bg-surface border border-border px-4 py-4 font-serif text-[0.95rem] leading-relaxed text-textmain min-h-[7.5rem]" data-reader-page></div>
+            <div class="flex items-center justify-between mt-3">
+              <button type="button" class="btn btn-ghost !px-4 !py-2 !min-h-[44px] !text-xs" data-reader-prev aria-label="Previous page">← Prev</button>
+              <p class="text-[11px] font-medium text-textmuted" aria-live="polite" data-reader-count>0 highlights</p>
+              <button type="button" class="btn btn-ghost !px-4 !py-2 !min-h-[44px] !text-xs" data-reader-next aria-label="Next page">Next →</button>
+            </div>
+          </div>
+
+          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">Next.js</li><li class="chip">Firebase</li></ul>
+          <div class="mt-auto">
+            <a href="https://ebookpro.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-sm w-full bg-teal/10 border border-teal/25 text-teal-ink hover:bg-teal/20">
+              Open Ebook Pro <span class="sr-only">(opens in a new tab)</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <div class="flex justify-between items-center px-1 mt-1">
+              <a href="https://ebookpro.hycyon.com" target="_blank" rel="noopener noreferrer" class="link-quiet">Company site<span class="sr-only"> (opens in a new tab)</span></a>
+              <a href="https://ebookpro.hycyon.com/privacy" target="_blank" rel="noopener noreferrer" class="link-quiet">Privacy policy<span class="sr-only"> (opens in a new tab)</span></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ 2 + 4 · WHY INTERESTING / HOW HE THINKS ═════════════ -->
+  <section id="story" aria-labelledby="story-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 sm:mb-20 reveal">
+        <span class="eyebrow eyebrow-teal">STORY</span>
+        <h2 id="story-title" class="section-title mb-4">Not scattered interests. One direction.</h2>
+        <p class="section-lede mx-auto">Code, science and Sanskrit started as separate threads. Follow the path and watch them meet.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 items-start">
+
+        <!-- Convergence figure (desktop: sticky; mobile: hidden — each chapter carries its own thread tags) -->
+        <aside class="hidden lg:block sticky top-28 reveal" aria-hidden="true">
+          <figure class="rounded-3xl border border-border bg-cardbg p-6" data-fig>
+            <svg viewBox="0 0 280 470" class="w-full h-auto max-h-[68vh]" role="presentation">
+              <defs>
+                <linearGradient id="gCode" gradientUnits="userSpaceOnUse" x1="0" y1="50" x2="0" y2="270"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+                <linearGradient id="gSci" gradientUnits="userSpaceOnUse" x1="0" y1="50" x2="0" y2="270"><stop offset="0" stop-color="#10B981"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient>
+                <linearGradient id="gSan" gradientUnits="userSpaceOnUse" x1="0" y1="50" x2="0" y2="270"><stop offset="0" stop-color="#F97316"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
+              </defs>
+              <!-- tracks -->
+              <path class="thread-track" d="M50 50 C50 160 140 170 140 270"/>
+              <path class="thread-track" d="M140 50 L140 270"/>
+              <path class="thread-track" d="M230 50 C230 160 140 170 140 270"/>
+              <path class="thread-track" d="M140 270 L140 355"/>
+              <path class="thread-track" stroke-dasharray="3 7" d="M140 355 L140 440"/>
+              <!-- drawn threads -->
+              <path class="thread" pathLength="1" stroke="url(#gCode)" d="M50 50 C50 160 140 170 140 270" data-thread="code"/>
+              <path class="thread" pathLength="1" stroke="url(#gSci)" d="M140 50 L140 270" data-thread="sci"/>
+              <path class="thread" pathLength="1" stroke="url(#gSan)" d="M230 50 C230 160 140 170 140 270" data-thread="san"/>
+              <path class="thread" pathLength="1" stroke="#2DD4BF" d="M140 270 L140 355" data-thread="hyc"/>
+              <path class="thread" pathLength="1" stroke="#2DD4BF" stroke-dasharray="1" d="M140 355 L140 440" data-thread="fut" style="stroke-dasharray:.04 .06"/>
+              <!-- labels -->
+              <text class="thread-label" x="50" y="30" text-anchor="middle" data-label="code">CODE</text>
+              <text class="thread-label" x="140" y="30" text-anchor="middle" data-label="sci">SCIENCE</text>
+              <text class="thread-label" x="230" y="30" text-anchor="middle" data-label="san">SANSKRIT</text>
+              <!-- nodes -->
+              <circle class="fig-node" cx="140" cy="270" r="11" data-fignode="merge"/>
+              <circle class="fig-node teal" cx="140" cy="355" r="11" data-fignode="hyc"/>
+              <circle class="fig-node teal" cx="140" cy="440" r="8" data-fignode="fut"/>
+              <text class="fig-caption" x="164" y="274" data-figcap="merge">LANGUAGE TECH</text>
+              <text class="fig-caption" x="164" y="359" data-figcap="hyc">HYCYON</text>
+              <text class="fig-caption" x="164" y="444" data-figcap="fut">NEXT</text>
+            </svg>
+          </figure>
+        </aside>
+
+        <!-- Chapters -->
+        <div class="story-list" data-story>
+          <span class="story-spine" aria-hidden="true"></span>
+          <ol class="list-none m-0 p-0">
+
+          <li class="story-step" data-step="0" style="--node-color:#F59E0B">
+            <button type="button" class="story-ring" aria-label="Chapter 1: Curious mind" data-jump>✦</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">2005 · Origin</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">A curious mind</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Born in India with an instinct for systems, patterns and how things fit together. Technology and language were never just hobbies; they were ways of seeing.</p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="1" style="--node-color:#10B981">
+            <button type="button" class="story-ring" aria-label="Chapter 2: Programming, science and mathematics" data-jump>◈</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">2009–2021 · School</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">Programming, science &amp; mathematics</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Twelve years of school built the base: mathematics, science and a first look at programming. Olympiads came along the way, and so did a first encounter with Sanskrit.</p>
+                <p class="mt-3 flex gap-2 flex-wrap" aria-label="Threads"><span class="chip">Code</span><span class="chip">Science</span></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="2" style="--node-color:#F97316">
+            <button type="button" class="story-ring font-deva" aria-label="Chapter 3: Sanskrit" data-jump>ॐ</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">2023–Present · Diploma</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">Sanskrit &amp; Vedic literature</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Alongside the degree, a Diploma in Sanskrit and Vedic Literature. A language with a formal grammatical tradition sits surprisingly close to computation, and that bridge is what this whole site is about.</p>
+                <p class="mt-3 flex gap-2 flex-wrap" aria-label="Threads"><span class="chip">Sanskrit</span></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="3" style="--node-color:#6366F1">
+            <button type="button" class="story-ring" aria-label="Chapter 4: Computer science" data-jump>⬡</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">2021–Present · B.Tech</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">Computer science</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">B.Tech in Computer Science &amp; Engineering: data structures, algorithms, distributed systems and software architecture. College is where theory met real building.</p>
+                <p class="mt-3 flex gap-2 flex-wrap"><span class="chip">CGPA 8.4+</span><span class="chip">Algorithms</span></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="4" style="--node-color:#8B5CF6">
+            <button type="button" class="story-ring" aria-label="Chapter 5: Product building" data-jump>⚡</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">2022–Present · Building</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">From studying to shipping</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Coursework turned into products: web apps, native iOS, and AI/ML experiments. Skills only count once they ship, so I started shipping.</p>
+                <p class="mt-3"><a href="#capabilities" class="text-sm font-bold text-accent-ink underline decoration-accent/30 underline-offset-4 inline-block py-2">See capabilities →</a></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="5" style="--node-color:#F59E0B">
+            <button type="button" class="story-ring font-deva" aria-label="Chapter 6: Language technology" data-jump>वा</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">Convergence · VaakBoard</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">Language technology</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">This is where the three threads became one thing: an iOS keyboard with a custom trie engine, transliteration into Devanāgarī and an offline Sanskrit lexicon. Sanskrit knowledge shaped the design. Engineering made it usable.</p>
+                <p class="mt-3 flex gap-2 flex-wrap items-center"><span class="chip">Code</span><span class="chip">Science</span><span class="chip">Sanskrit</span><a href="#vaakboard" class="text-sm font-bold text-accent-ink underline decoration-accent/30 underline-offset-4 ml-1 inline-block py-2">Try it →</a></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="6" style="--node-color:#2DD4BF">
+            <button type="button" class="story-ring" aria-label="Chapter 7: Hycyon" data-jump>H</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">Company · Founder</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">Hycyon</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">A Udyam-registered MSME that gives the products and the services a home. The person and the company grew together.</p>
+                <p class="mt-3"><a href="#hycyon" class="text-sm font-bold text-accent-ink underline decoration-accent/30 underline-offset-4 inline-block py-2">How it connects →</a></p>
+              </div></div>
+            </div>
+          </li>
+
+          <li class="story-step" data-step="7" style="--node-color:#2DD4BF">
+            <button type="button" class="story-ring" aria-label="Chapter 8: What’s next" data-jump>∞</button>
+            <div class="story-card">
+              <p class="meta-label mb-1">Future</p>
+              <h3 class="story-title font-display font-bold text-lg sm:text-xl">What’s next</h3>
+              <div class="story-extra"><div>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">The path ahead is still being written. If you’re building something meaningful or want to collaborate, tell me about it.</p>
+                <p class="mt-4"><a href="#contact" class="btn btn-sm bg-teal/10 border border-teal/30 text-teal-ink hover:bg-teal/20 w-full sm:w-auto">Start a conversation</a></p>
+              </div></div>
+            </div>
+          </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ 5 · WHAT CAN HE DO ═════════════ -->
+  <section id="capabilities" aria-labelledby="cap-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12 sm:mb-16 reveal">
+        <span class="eyebrow eyebrow-accent">CAPABILITIES</span>
+        <h2 id="cap-title" class="section-title mb-4">What I can build with you</h2>
+        <p class="section-lede mx-auto">Six areas of work. The tools sit underneath each one because the problem should come first.</p>
+      </div>
+
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0">
+        <li class="card p-6 sm:p-7 reveal" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">01 · Product engineering</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Idea to production</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Complete digital products: design, build, ship and run.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#brainspark">BrainSparkOS</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
+          <p class="font-mono text-[11px] text-textmuted">Swift · React · Next.js · Firebase</p>
+        </li>
+        <li class="card p-6 sm:p-7 reveal delay-100" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">02 · Mobile</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Native iOS</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Apps and keyboard extensions, delivered through the App Store.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a></p>
+          <p class="font-mono text-[11px] text-textmuted">Swift · UIKit · SwiftUI · App Extensions · CoreData</p>
+        </li>
+        <li class="card p-6 sm:p-7 reveal delay-200" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">03 · Web</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Web applications</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Interactive web apps and platforms that are quick to load and easy to use.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#brainspark">BrainSparkOS</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
+          <p class="font-mono text-[11px] text-textmuted">React · Next.js · Node.js</p>
+        </li>
+        <li class="card p-6 sm:p-7 reveal" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">04 · AI / computational systems</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Intelligent tooling</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">AI-powered tools, retrieval workflows and computational systems.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Machine learning is part of the toolkit alongside the web and iOS work.</p>
+          <p class="font-mono text-[11px] text-textmuted">Python · TensorFlow · PyTorch · RAG</p>
+        </li>
+        <li class="card p-6 sm:p-7 reveal delay-100" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">05 · Language technology</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Sanskrit in software</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Transliteration, text processing and language-focused software.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a>: custom trie engine, offline lexicon</p>
+          <p class="font-mono text-[11px] text-textmuted">Swift · IAST · Devanāgarī</p>
+        </li>
+        <li class="card p-6 sm:p-7 reveal delay-200" data-spotlight>
+          <p class="meta-label mb-3 text-accent-ink">06 · Infrastructure</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Data &amp; deployment</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">The databases, hosting and production setup behind the products.</p>
+          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
+          <p class="font-mono text-[11px] text-textmuted">Firebase · PostgreSQL</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═════════════ 6 · WHAT IS HE BUILDING NEXT — the company behind the work ═════════════ -->
+  <section id="hycyon" aria-labelledby="hycyon-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12 sm:mb-16 reveal">
+        <span class="eyebrow eyebrow-teal">HYCYON</span>
+        <h2 id="hycyon-title" class="section-title mb-4">The person, and the company around the work</h2>
+        <p class="section-lede mx-auto">This site is about me. Hycyon is where the products and services live. I founded it, and I build for it.</p>
+      </div>
+
+      <div class="card p-6 sm:p-10 reveal" data-chain>
+        <ol class="flex flex-col lg:flex-row lg:items-stretch gap-0 list-none p-0 m-0">
+          <li class="chain-node lg:flex-1" data-chain-node="person">
+            <p class="meta-label mb-1">The person</p>
+            <p class="font-display font-bold text-lg text-textmain">Abhishek Sharma</p>
+            <p class="text-sm text-textmuted font-medium mt-1">Engineer · linguist · builder</p>
+          </li>
+          <li aria-hidden="true" class="chain-link"></li>
+          <li class="chain-node lg:flex-1" data-chain-node="founder">
+            <p class="meta-label mb-1">The role</p>
+            <p class="font-display font-bold text-lg text-textmain">Founder</p>
+            <p class="text-sm text-textmuted font-medium mt-1">Founder &amp; CEO</p>
+          </li>
+          <li aria-hidden="true" class="chain-link"></li>
+          <li class="chain-node lg:flex-1" data-chain-node="company">
+            <p class="meta-label mb-1">The company</p>
+            <p class="font-display font-bold text-lg text-textmain">Hycyon</p>
+            <p class="text-sm text-textmuted font-medium mt-1">Udyam-registered MSME</p>
+          </li>
+          <li aria-hidden="true" class="chain-link"></li>
+          <li class="chain-node lg:flex-[1.3]" data-chain-node="outputs">
+            <p class="meta-label mb-2">What comes out of it</p>
+            <ul class="flex flex-wrap gap-2 list-none p-0 m-0">
+              <li><a href="#vaakboard" class="chip inline-flex items-center min-h-[36px] hover:border-accent hover:text-textmain">VaakBoard</a></li>
+              <li><a href="#brainspark" class="chip inline-flex items-center min-h-[36px] hover:border-accent hover:text-textmain">BrainSparkOS</a></li>
+              <li><a href="#ebookpro" class="chip inline-flex items-center min-h-[36px] hover:border-accent hover:text-textmain">Ebook Pro</a></li>
+            </ul>
+            <p class="text-sm text-textmuted font-medium mt-3">Services: full-stack web development and AI integrations.</p>
+          </li>
+        </ol>
+
+        <div class="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p class="text-sm text-textmuted font-medium max-w-xl">Looking for the company, rather than the person? Hycyon has its own pages.</p>
+          <a href="https://ebookpro.hycyon.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm w-full sm:w-auto">
+            Visit the company site <span class="sr-only">(opens in a new tab)</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </div>
-
-        <!-- Project 2: BrainSparkOS -->
-        <div class="group col-span-1 bg-cardbg backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 hover:border-amber-500/50 transition-colors reveal delay-200 flex flex-col justify-between min-h-[380px] shadow-sm">
-          <div>
-            <div class="flex justify-between items-start mb-6">
-              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center border border-amber-500/20 shadow-inner">
-                <svg width="24" height="24" sm:width="28" sm:height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
-              </div>
-              <span class="px-3 py-1 bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 rounded-full font-mono font-bold text-[10px] uppercase">EdTech OS</span>
-            </div>
-            <h3 class="font-display font-bold text-xl sm:text-2xl text-textmain mb-3 group-hover:text-amber-500 transition-colors">BrainSparkOS</h3>
-            <p class="text-textmuted text-sm leading-relaxed mb-6 font-medium">
-              The ultimate quiz application platform designed to spark learning. Features intelligent gamification, real-time leaderboards, and a dynamic question engine for students.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">React</span>
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">Gamification</span>
-            </div>
-          </div>
-          <a href="https://brainsparkos.web.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center sm:justify-start gap-2 text-amber-600 dark:text-amber-400 font-bold text-sm hover:gap-3 transition-all w-full sm:w-fit bg-amber-500/10 px-5 py-2.5 rounded-xl border border-amber-500/20">
-               View App 
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                 <polyline points="9 18 15 12 9 6"/>
-             </svg>
-           </a>
-
-  </div>
-
-        <!-- Project 3: EbookPro -->
-        <div class="group col-span-1 bg-cardbg backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 hover:border-teal/50 transition-colors reveal delay-300 flex flex-col justify-between min-h-[380px] shadow-sm">
-          <div>
-            <div class="flex justify-between items-start mb-6">
-              <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-teal/10 text-teal flex items-center justify-center border border-teal/20 shadow-inner">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-              </div>
-              <span class="px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 rounded-full font-mono font-bold text-[10px] uppercase">Web App</span>
-            </div>
-            <h3 class="font-display font-bold text-xl sm:text-2xl text-textmain mb-3 group-hover:text-teal transition-colors">EbookPro</h3>
-            <p class="text-textmuted text-sm leading-relaxed mb-6 font-medium">
-              A comprehensive digital reading and publishing web application offering seamless access to literature with premium reading experiences.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">Next.js</span>
-              <span class="px-3 py-1 rounded-full bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted">Firebase</span>
-            </div>
-          </div>
-          <div class="flex flex-col gap-3">
-            <a href="https://ebookpro.web.app" target="_blank" class="inline-flex items-center justify-center gap-2 text-teal font-bold text-sm hover:-translate-y-0.5 transition-all w-full bg-teal/10 px-5 py-3 rounded-xl border border-teal/20">
-              Visit Web App <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <div class="flex justify-between items-center px-1">
-              <a href="https://ebookpro.hycyon.com" target="_blank" class="text-[11px] text-textmuted hover:text-textmain font-medium underline decoration-border underline-offset-4">Company Site</a>
-              <a href="https://ebookpro.hycyon.com/privacy" target="_blank" class="text-[11px] text-textmuted hover:text-textmain font-medium underline decoration-border underline-offset-4">Privacy Policy</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4: Hycyon Tech Giant (Spans 2 cols on Desktop/Tablet) -->
-        <div class="group col-span-1 md:col-span-2 lg:col-span-2 bg-cardbg backdrop-blur-xl border border-border rounded-3xl p-6 sm:p-8 md:p-10 hover:border-indigo-400/50 transition-colors reveal delay-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8 shadow-sm">
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-4">
-              <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center border border-indigo-500/20 shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-              </div>
-              <h3 class="font-display font-bold text-xl sm:text-2xl text-textmain">Hycyon (Tech Giant)</h3>
-              <span class="px-3 py-1 bg-slate-500/10 text-slate-600 dark:text-slate-400 border border-slate-500/20 rounded-full font-mono font-bold text-[10px] uppercase">Founder & CEO</span>
-            </div>
-            <p class="text-textmuted text-sm sm:text-base leading-relaxed max-w-2xl font-medium">
-              Founded Hycyon, a visionary tech enterprise driving digital architecture, high-quality full-stack web development, and AI integrations. Transforming from a Udyam-registered MSME into a powerhouse building the future of digital services and platforms.
-            </p>
-          </div>
-          <div class="flex flex-row md:flex-col flex-wrap gap-2 shrink-0">
-            <span class="px-4 py-2 rounded-xl bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted text-center">Enterprise Tech</span>
-            <span class="px-4 py-2 rounded-xl bg-surface2 border border-border text-[10px] sm:text-xs font-mono font-bold text-textmuted text-center">B2B Services</span>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Interactive Timeline / Journey -->
-  <section id="journey" class="relative py-20 sm:py-24 px-4 sm:px-6 z-10">
-    <div class="max-w-4xl mx-auto">
-      
-      <div class="text-center mb-16 sm:mb-20 reveal">
-        <span class="inline-block font-mono text-xs text-teal font-bold tracking-[0.2em] px-4 py-1.5 bg-teal/10 border border-teal/20 rounded-full mb-4">TIMELINE</span>
-        <h2 class="font-display font-black text-3xl sm:text-4xl md:text-5xl text-textmain mb-4">The Journey So Far</h2>
-        <p class="text-textmuted text-sm sm:text-base md:text-lg max-w-xl mx-auto font-medium">Click any node to illuminate the path. Discover the intersection of academics, programming, and philosophy.</p>
-      </div>
-      
-      <div class="timeline-wrapper reveal delay-100" data-timeline="true">
-        <div class="timeline-spine"></div>
-
-        <!-- Node 1: Origin -->
-        <div class="timeline-node" data-node="birth">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #F59E0B">✦</div></div>
-          <div class="timeline-card left-card" data-trigger="true" style="--node-color: #F59E0B">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">Origin · 2005</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">The Beginning</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <p class="text-sm md:text-base text-textmuted mt-4 leading-relaxed font-medium">Born in India with an innate curiosity for systems, patterns, and how things fit together. From the earliest age, technology and language were not just interests — they were ways of seeing the world.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Node 2: Schooling -->
-        <div class="timeline-node" data-node="school">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #10B981">◈</div></div>
-          <div class="timeline-card right-card" data-trigger="true" style="--node-color: #10B981">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">Schooling · 2009–2021</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">Foundation Years</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <p class="text-sm md:text-base text-textmuted mt-4 leading-relaxed font-medium">Twelve years of building the intellectual bedrock — mathematics, science, and early programming exposure. Participated in Olympiads and first encountered the Sanskrit language that would shape future projects.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Node 3: BTech -->
-        <div class="timeline-node" data-node="college">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #6366F1">⬡</div></div>
-          <div class="timeline-card left-card" data-trigger="true" style="--node-color: #6366F1">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">College · 2021–Present</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">B.Tech in Computer Science</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <p class="text-sm md:text-base text-textmuted mt-4 leading-relaxed font-medium">Pursuing a B.Tech in CS & Engineering. Diving deep into data structures, algorithms, distributed systems, and software architecture. College became the crucible where theory met real-world building.</p>
-              <div class="flex flex-wrap gap-2 mt-4">
-                <span class="px-3 py-1 bg-surface2 border border-border font-bold text-[10px] rounded-full font-mono text-textmuted">CGPA 8.4+</span>
-                <span class="px-3 py-1 bg-surface2 border border-border font-bold text-[10px] rounded-full font-mono text-textmuted">Algorithms</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Node 4: Vedic Studies -->
-        <div class="timeline-node" data-node="sidedegree">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #F97316">ॐ</div></div>
-          <div class="timeline-card right-card" data-trigger="true" style="--node-color: #F97316">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">Side Degree · 2023–Present</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">Vedic Studies & Sanskrit</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <p class="text-sm md:text-base text-textmuted mt-4 leading-relaxed font-medium">Simultaneously pursuing a Diploma in Sanskrit and Vedic Literature. A cross-disciplinary path bridging ancient Indian linguistic systems with modern computational thinking — directly fuelling projects like VaakBoard.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Node 5: Tech Stack -->
-        <div class="timeline-node" data-node="skills">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #8B5CF6">⚡</div></div>
-          <div class="timeline-card left-card" data-trigger="true" style="--node-color: #8B5CF6">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">Skills · 2022–Present</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">Technical Arsenal</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-                <div class="bg-surface2/50 border border-border rounded-xl p-3 sm:p-4">
-                  <div class="text-xs sm:text-sm font-bold text-textmain mb-1 flex items-center gap-2"><span>🌐</span> Full-Stack Web</div>
-                  <div class="text-[11px] sm:text-xs text-textmuted font-medium">React, Next.js, Node.js, PostgreSQL</div>
-                </div>
-                <div class="bg-surface2/50 border border-border rounded-xl p-3 sm:p-4">
-                  <div class="text-xs sm:text-sm font-bold text-textmain mb-1 flex items-center gap-2"><span>🤖</span> AI/ML</div>
-                  <div class="text-[11px] sm:text-xs text-textmuted font-medium">Python, TensorFlow, PyTorch, RAG</div>
-                </div>
-                <div class="bg-surface2/50 border border-border rounded-xl p-3 sm:p-4 sm:col-span-2">
-                  <div class="text-xs sm:text-sm font-bold text-textmain mb-1 flex items-center gap-2"><span>📱</span> iOS / Swift</div>
-                  <div class="text-[11px] sm:text-xs text-textmuted font-medium">UIKit, SwiftUI, custom extensions, App Store delivery</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Node 6: Future -->
-        <div class="timeline-node" data-node="future">
-          <div class="node-trigger"><div class="node-ring" style="--node-color: #2DD4BF">∞</div></div>
-          <div class="timeline-card right-card" data-trigger="true" style="--node-color: #2DD4BF">
-            <div class="flex justify-between items-start">
-              <div>
-                <div class="font-mono font-bold text-[10px] text-textmuted tracking-wider mb-1 uppercase">Future</div>
-                <div class="font-display font-bold text-lg sm:text-xl text-textmain transition-colors">What's Next</div>
-              </div>
-              <div class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-border mt-2 transition-colors card-dot"></div>
-            </div>
-            <div class="card-content">
-              <p class="text-sm md:text-base text-textmuted mt-4 mb-6 leading-relaxed font-medium">The path ahead is being written. If you're building something meaningful or want to collaborate — reach out below.</p>
-              <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" class="w-full py-3 bg-teal/10 hover:bg-teal/20 border border-teal/30 text-teal font-bold rounded-xl text-sm transition-colors">Contact Me</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="relative py-20 sm:py-24 px-4 sm:px-6 z-10 bg-gradient-to-t from-surface via-transparent to-transparent">
-    <div class="max-w-xl mx-auto">
+  <!-- ═════════════ 7 · SHOULD I CONTACT HIM? ═════════════ -->
+  <section id="contact" aria-labelledby="contact-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10 bg-gradient-to-t from-surface via-transparent to-transparent">
+    <div class="max-w-2xl mx-auto">
       <div class="text-center mb-10 reveal">
-        <span class="inline-block font-mono text-xs font-bold text-accent tracking-[0.2em] px-4 py-1.5 bg-accent/10 border border-accent/20 rounded-full mb-4">CONTACT</span>
-        <h2 class="font-display font-black text-3xl sm:text-4xl md:text-5xl text-textmain mb-3">Let's Build Something</h2>
-        <p class="text-textmuted text-sm sm:text-base font-medium">Send a message directly to my inbox.</p>
+        <span class="eyebrow eyebrow-accent">CONTACT</span>
+        <h2 id="contact-title" class="section-title mb-3">What are you building?</h2>
+        <p class="text-textmuted text-base font-medium">Pick the closest fit, then say a little more. It goes straight to my inbox.</p>
       </div>
 
-      <div class="bg-cardbg backdrop-blur-2xl border border-border rounded-3xl sm:rounded-[2rem] p-6 sm:p-10 shadow-xl reveal delay-100">
-        <div class="flex flex-col gap-4">
-          <input type="text" id="m-fname" placeholder="Your name" class="w-full bg-surface border border-border rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-textmain font-medium text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all placeholder:text-textmuted">
-          <input type="email" id="m-femail" placeholder="your@email.com" class="w-full bg-surface border border-border rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-textmain font-medium text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all placeholder:text-textmuted">
-          <textarea id="m-fmsg" placeholder="What are you building?" rows="4" class="w-full bg-surface border border-border rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-textmain font-medium text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all placeholder:text-textmuted resize-none"></textarea>
-          
-          <button onclick="submitForm(this, 'm-fname', 'm-fmsg')" class="mt-2 w-full sm:w-auto self-start px-8 py-4 rounded-xl grad-bg text-white font-display font-bold text-sm shadow-[0_4px_24px_rgba(99,102,241,0.2)] hover:shadow-[0_8px_32px_rgba(99,102,241,0.4)] transition-all">
-            Send Message
-          </button>
+      <form id="contact-form" class="card p-6 sm:p-10 shadow-xl reveal delay-100" novalidate>
+        <fieldset class="border-0 p-0 m-0 min-w-0">
+          <legend class="font-display font-bold text-lg text-textmain mb-4">I’m working on…</legend>
+          <div class="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3" data-intents>
+            <div><input class="sr-radio sr-only" type="radio" name="intent" id="i-product" value="A product" required><label class="intent-chip" for="i-product">A product</label></div>
+            <div><input class="sr-radio sr-only" type="radio" name="intent" id="i-web" value="A website / platform"><label class="intent-chip" for="i-web">A website / platform</label></div>
+            <div><input class="sr-radio sr-only" type="radio" name="intent" id="i-mobile" value="A mobile app"><label class="intent-chip" for="i-mobile">A mobile app</label></div>
+            <div><input class="sr-radio sr-only" type="radio" name="intent" id="i-exp" value="Something experimental"><label class="intent-chip" for="i-exp">Something experimental</label></div>
+            <div class="min-[420px]:col-span-2"><input class="sr-radio sr-only" type="radio" name="intent" id="i-collab" value="Collaboration"><label class="intent-chip" for="i-collab">Collaboration</label></div>
+          </div>
+        </fieldset>
+
+        <div class="reveal-rows" data-collapsed="false" data-details>
+          <div>
+            <div class="flex flex-col gap-4 pt-6">
+              <div>
+                <label for="f-name" class="block text-sm font-bold text-textmain mb-2">Your name</label>
+                <input class="field" type="text" id="f-name" name="name" autocomplete="name" required>
+              </div>
+              <div>
+                <label for="f-email" class="block text-sm font-bold text-textmain mb-2">Your email</label>
+                <input class="field" type="email" id="f-email" name="email" autocomplete="email" inputmode="email" required>
+              </div>
+              <div>
+                <label for="f-msg" class="block text-sm font-bold text-textmain mb-2">Tell me about it</label>
+                <textarea class="field resize-y" id="f-msg" name="message" rows="4" required data-msg></textarea>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+                <button type="submit" class="btn btn-primary w-full sm:w-auto">Write the email</button>
+                <p class="text-xs text-textmuted font-medium leading-relaxed">This opens a draft in your email app. Nothing is sent from this page.</p>
+              </div>
+              <p id="form-status" role="status" aria-live="polite" class="text-sm font-bold min-h-[1.25rem]"></p>
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
+
+      <p class="text-center text-sm text-textmuted font-medium mt-6 reveal">
+        Prefer to write directly?
+        <a href="mailto:bhugraduate@gmail.com" class="font-bold text-textmain underline decoration-border underline-offset-4 hover:text-accent-ink">bhugraduate@gmail.com</a>
+        <button type="button" class="ml-1 link-quiet !min-h-[44px] px-3" data-copy-email>Copy</button>
+      </p>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="relative border-t border-border pt-16 pb-8 px-4 sm:px-6 z-10 bg-surface">
+  </main>
+
+  <footer class="relative border-t border-border pt-14 pb-8 px-4 sm:px-6 z-10 bg-surface">
     <div class="max-w-6xl mx-auto text-center">
-      <div class="font-display font-black text-2xl sm:text-3xl mb-3">
+      <p class="font-display font-black text-2xl sm:text-3xl mb-3">
         <span class="grad-text">Abhishek</span><span class="text-textmain ml-1">Sharma</span>
-      </div>
-      <p class="font-mono font-bold text-[10px] sm:text-xs text-textmuted tracking-[0.2em] sm:tracking-[0.25em] mb-10">FOUNDER · BUILDER · LINGUIST</p>
-      
-      <div class="flex justify-center gap-3 sm:gap-4 mb-12">
-        <a href="https://linkedin.com/in/bhugraduate" target="_blank" title="LinkedIn" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl border border-border bg-surface2 text-textmuted hover:text-accent hover:border-accent/50 hover:bg-accent/10 flex items-center justify-center transition-all">
-          <svg width="18" height="18" sm:width="20" sm:height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="https://github.com/BHUgraduate" target="_blank" title="GitHub" class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl border border-border bg-surface2 text-textmuted hover:text-textmain hover:border-textmuted/50 hover:bg-textmain/10 flex items-center justify-center transition-all">
-          <svg width="18" height="18" sm:width="20" sm:height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        </a>
-        <a href="https://youtube.com/@संस्कृतस्यछात्रः" target="_blank" title="YouTube: @संस्कृतस्यछात्रः" class="group flex items-center gap-2 h-10 sm:h-12 px-3 sm:px-4 rounded-xl border border-border bg-surface2 text-textmuted hover:text-red-500 hover:border-red-500/50 hover:bg-red-500/10 transition-all">
-          <svg width="18" height="18" sm:width="22" sm:height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          <span class="font-mono text-[10px] sm:text-xs font-bold text-textmuted group-hover:text-red-500 transition-colors">@संस्कृतस्यछात्रः</span>
-        </a>
-      </div>
-      
-      <div class="h-px w-full max-w-md mx-auto bg-gradient-to-r from-transparent via-border to-transparent mb-8"></div>
-      <p class="font-mono font-bold text-[9px] sm:text-[10px] text-textmuted uppercase tracking-widest">© 2026 Abhishek Sharma · Built with intention</p>
+      </p>
+      <p class="font-mono font-bold text-[10px] sm:text-xs text-textmuted tracking-[0.2em] sm:tracking-[0.25em] mb-8">FOUNDER · BUILDER · ENGINEER · LINGUIST</p>
+
+      <ul class="flex justify-center flex-wrap gap-3 sm:gap-4 mb-10 list-none p-0">
+        <li><a href="https://linkedin.com/in/bhugraduate" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)" class="w-12 h-12 rounded-xl border border-border bg-surface2 text-textmuted hover:text-accent-ink hover:border-accent/50 hover:bg-accent/10 flex items-center justify-center transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a></li>
+        <li><a href="https://github.com/BHUgraduate" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)" class="w-12 h-12 rounded-xl border border-border bg-surface2 text-textmuted hover:text-textmain hover:border-textmuted/50 hover:bg-textmain/10 flex items-center justify-center transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/@%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%83%E0%A4%A4%E0%A4%B8%E0%A5%8D%E0%A4%AF%E0%A4%9B%E0%A4%BE%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%83" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 h-12 px-4 rounded-xl border border-border bg-surface2 text-textmuted hover:text-red-600 dark:hover:text-red-400 hover:border-red-500/50 hover:bg-red-500/10 transition-colors">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          <span class="font-mono text-xs font-bold" lang="sa">संस्कृतस्यछात्रः</span><span class="sr-only">on YouTube (opens in a new tab)</span>
+        </a></li>
+      </ul>
+
+      <div class="h-px w-full max-w-md mx-auto bg-gradient-to-r from-transparent via-border to-transparent mb-6"></div>
+      <p class="font-mono font-bold text-[10px] text-textmuted uppercase tracking-widest">© 2026 Abhishek Sharma · Built with intention</p>
     </div>
   </footer>
 
-  <!-- Combined JavaScript logic -->
-  <script>
-    /* ─── Scroll Reveal Observer ─── */
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    /* ─── Navbar & Mobile Menu Logic ─── */
-    const navBar = document.getElementById('navbar');
-    const navContent = document.getElementById('nav-content');
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    let menuOpen = false;
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        navContent.classList.add('bg-surface/80', 'backdrop-blur-xl', 'border-border', 'shadow-sm');
-        navContent.classList.remove('border-transparent');
-      } else {
-        navContent.classList.remove('bg-surface/80', 'backdrop-blur-xl', 'border-border', 'shadow-sm');
-        navContent.classList.add('border-transparent');
-      }
-    });
-
-    function toggleMenu() {
-      menuOpen = !menuOpen;
-      if (menuOpen) {
-        mobileMenu.classList.remove('hidden');
-        mobileMenuBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-      } else {
-        mobileMenu.classList.add('hidden');
-        mobileMenuBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
-      }
-    }
-
-    mobileMenuBtn.addEventListener('click', toggleMenu);
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => { if(menuOpen) toggleMenu(); });
-    });
-
-    /* ─── Contact Form (mailto fallback) ─── */
-    window.submitForm = function(btn, nameId, msgId) {
-      const name = document.getElementById(nameId).value;
-      const msg = document.getElementById(msgId).value;
-
-      if (!name || !msg) {
-        alert("Please enter your name and message.");
-        return;
-      }
-      const subject = encodeURIComponent(`New message from ${name} via Portfolio`);
-      const body = encodeURIComponent(msg);
-      
-      window.location.href = `mailto:bhugraduate@gmail.com?subject=${subject}&body=${body}`;
-      
-      const originalText = btn.innerHTML;
-      btn.innerHTML = 'Draft Opened!';
-      btn.classList.add('bg-emerald-500');
-      btn.classList.remove('grad-bg');
-      setTimeout(() => { 
-        btn.innerHTML = originalText; 
-        btn.classList.remove('bg-emerald-500');
-        btn.classList.add('grad-bg');
-      }, 3000);
-    };
-
-    /* ─── Premium Timeline State Manager ─── */
-    function openPanel(panel) {
-      if (panel.dataset.state === 'open') return;
-      panel.dataset.state = 'opening';
-      panel.style.visibility = 'visible';
-      
-      requestAnimationFrame(() => {
-        panel.style.transition = 'max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease';
-        panel.style.maxHeight = panel.scrollHeight + 40 + 'px';
-        panel.style.opacity = '1';
-
-        panel.addEventListener('transitionend', function onEnd(e) {
-          if (e.propertyName !== 'max-height') return;
-          panel.removeEventListener('transitionend', onEnd);
-          panel.style.maxHeight = 'none';
-          panel.dataset.state = 'open';
-        }, { once: false });
-      });
-    }
-
-    function closePanel(panel) {
-      if (panel.dataset.state === 'closed' || panel.dataset.state === 'closing') return;
-      panel.dataset.state = 'closing';
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-      
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          panel.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease';
-          panel.style.maxHeight = '0px';
-          panel.style.opacity = '0';
-
-          panel.addEventListener('transitionend', function onEnd(e) {
-            if (e.propertyName !== 'max-height') return;
-            panel.removeEventListener('transitionend', onEnd);
-            panel.style.visibility = 'hidden';
-            panel.dataset.state = 'closed';
-          }, { once: false });
-        });
-      });
-    }
-
-    const TimelineManager = (() => {
-      let activeNodeIndex = null;
-      function allNodes() { return [...document.querySelectorAll('[data-node]')]; }
-      function panelOf(nodeEl) { return nodeEl.querySelector('.card-content'); }
-
-      function updateTrail(openIdx) {
-        const nodes = allNodes();
-        nodes.forEach((node, i) => {
-          node.classList.toggle('node-active', i === openIdx);
-          node.classList.toggle('node-completed', openIdx !== null && i < openIdx);
-        });
-
-        const wrapper = document.querySelector('[data-timeline]');
-        if (wrapper && openIdx !== null) {
-          const pct = openIdx === nodes.length - 1 ? 100 : ((openIdx + 0.5) / (nodes.length - 1)) * 100;
-          wrapper.style.setProperty('--progress', pct.toFixed(1) + '%');
-        } else if (wrapper) {
-          wrapper.style.setProperty('--progress', '0%');
-        }
-      }
-
-      function toggleNode(index) {
-        const nodes = allNodes();
-        if (index < 0 || index >= nodes.length) return;
-        const targetNode = nodes[index];
-        const targetPanel = panelOf(targetNode);
-
-        if (activeNodeIndex === index) {
-          if (targetPanel) closePanel(targetPanel);
-          activeNodeIndex = null;
-          updateTrail(null);
-          return;
-        }
-        if (activeNodeIndex !== null) {
-          const prevPanel = panelOf(nodes[activeNodeIndex]);
-          if (prevPanel) closePanel(prevPanel);
-        }
-        activeNodeIndex = index;
-        if (targetPanel) openPanel(targetPanel);
-        updateTrail(index);
-      }
-
-      function init() {
-        const nodes = allNodes();
-        nodes.forEach((node, nodeIdx) => {
-          const panel = panelOf(node);
-          if (panel) {
-            panel.style.maxHeight = '0px'; 
-            panel.style.opacity = '0';
-            panel.style.visibility = 'hidden';
-            panel.dataset.state = 'closed';
-          }
-          const trigger = node.querySelector('.timeline-card');
-          if (trigger) {
-            trigger.addEventListener('click', (e) => {
-              if (e.target.tagName.toLowerCase() === 'button' || e.target.closest('a')) return; 
-              e.stopPropagation(); toggleNode(nodeIdx);
-            });
-          }
-          const ringTrigger = node.querySelector('.node-trigger');
-          if (ringTrigger) {
-             ringTrigger.addEventListener('click', (e) => { e.stopPropagation(); toggleNode(nodeIdx); });
-          }
-        });
-      }
-
-      return { init };
-    })();
-
-    document.addEventListener('DOMContentLoaded', () => { TimelineManager.init(); });
-  </script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
-
-
