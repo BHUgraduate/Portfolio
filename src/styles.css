@@ -349,7 +349,13 @@ input.sr-radio:focus-visible + .intent-chip { outline: 2px solid var(--accent-in
 }
 .field::placeholder { color: var(--text-muted); opacity: .85; }
 .field:focus { outline: none; border-color: #6366F1; box-shadow: 0 0 0 3px rgba(99,102,241,.22); }
-.field:user-invalid { border-color: #EF4444; }
+.field[aria-invalid='true'] { border-color: #EF4444; }
+.field-error { margin-top: .4rem; font-size: .8rem; font-weight: 700; color: #DC2626; }
+@media (prefers-color-scheme: dark) { .field-error { color: #F87171; } }
+.form-status { border-radius: .75rem; padding: .75rem 1rem; font-size: .875rem; font-weight: 700; border: 1px solid; }
+.form-status[data-kind='error'] { color: #B91C1C; background: rgba(239,68,68,.08); border-color: rgba(239,68,68,.3); }
+.form-status[data-kind='success'] { color: var(--green-ink); background: rgba(16,185,129,.08); border-color: rgba(16,185,129,.3); }
+@media (prefers-color-scheme: dark) { .form-status[data-kind='error'] { color: #F87171; } }
 
 /* ───────────────────────── Reduced motion ───────────────────────── */
 @media (prefers-reduced-motion: reduce) {
