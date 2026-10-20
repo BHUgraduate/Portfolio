@@ -57,9 +57,8 @@ const page = (c) => {
   <meta name="twitter:description" content="${esc(c.summary)}">
   <meta name="twitter:image" content="${ORIGIN}/assets/img/og-image.jpg">
   <script type="application/ld+json">${JSON.stringify(ld)}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" crossorigin>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
   <link rel="stylesheet" href="../../assets/css/site.css">
   <link rel="stylesheet" href="../../assets/css/case.css">
 </head>
