@@ -3,9 +3,10 @@
   "private": true,
   "description": "Abhishek Sharma \u2014 personal portfolio (static site, served by GitHub Pages)",
   "scripts": {
-    "build": "tailwindcss -c tailwind.config.js -i src/styles.css -o assets/css/site.css --minify",
+    "build": "tailwindcss -c tailwind.config.js -i src/styles.css -o assets/css/site.css --minify && tailwindcss -c tailwind.keyboard.config.js -i src/keyboard.css -o assets/css/keyboard.css --minify",
     "watch": "tailwindcss -c tailwind.config.js -i src/styles.css -o assets/css/site.css --watch",
-    "test": "node --test \"tests/*.test.mjs\""
+    "test": "node scripts/build-case-studies.mjs && node --test \"tests/*.test.mjs\"",
+    "cases": "node scripts/build-case-studies.mjs"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"

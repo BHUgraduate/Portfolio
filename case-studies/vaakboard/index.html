@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VaakBoard: a precision input system for Sanskrit — Abhishek Sharma</title>
+  <meta name="description" content="The language problem behind VaakBoard, the layered transliteration engine that exists today, what is tested, and what is deliberately not built yet.">
+  <meta name="author" content="Abhishek Sharma">
+  <meta name="theme-color" content="#080C14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://portfolio.hycyon.com/case-studies/vaakboard/">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abhishek Sharma">
+  <meta property="og:title" content="VaakBoard: a precision input system for Sanskrit">
+  <meta property="og:description" content="Typing Sanskrit on a phone is a linguistics problem before it is a layout problem. This study separates what exists, what is being built, and what is only a plan.">
+  <meta property="og:url" content="https://portfolio.hycyon.com/case-studies/vaakboard/">
+  <meta property="og:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VaakBoard: a precision input system for Sanskrit">
+  <meta name="twitter:description" content="Typing Sanskrit on a phone is a linguistics problem before it is a layout problem. This study separates what exists, what is being built, and what is only a plan.">
+  <meta name="twitter:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"VaakBoard: a precision input system for Sanskrit","description":"The language problem behind VaakBoard, the layered transliteration engine that exists today, what is tested, and what is deliberately not built yet.","url":"https://portfolio.hycyon.com/case-studies/vaakboard/","inLanguage":"en","author":{"@type":"Person","name":"Abhishek Sharma","url":"https://portfolio.hycyon.com/"},"publisher":{"@type":"Organization","name":"Hycyon","url":"https://hycyon.com"},"image":"https://portfolio.hycyon.com/assets/img/og-image.jpg"}</script>
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" crossorigin>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/case.css">
+</head>
+<body class="antialiased font-sans">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="cs-bar">
+    <nav class="cs-nav" aria-label="Primary">
+      <a class="cs-home" href="../../">Abhishek Sharma</a>
+      <a href="../../#work">All work</a>
+      <a href="../../#contact" class="cs-cta">Get in touch</a>
+    </nav>
+  </header>
+  <main id="main">
+    <article>
+      <header class="cs-hero">
+        <p class="cs-kicker">Product case study</p>
+        <h1>VaakBoard: a precision input system for Sanskrit</h1>
+        <p class="cs-lede">Typing Sanskrit on a phone is a linguistics problem before it is a layout problem. This study separates what exists, what is being built, and what is only a plan.</p>
+        <p class="cs-status"><span class="cs-dot soon" aria-hidden="true"></span>iOS keyboard coming soon · engine and web demo working</p>
+        <dl class="cs-facts"><div><dt>Role</dt><dd>Product, language design and engineering</dd></div><div><dt>Engine</dt><dd>JavaScript, covered by an automated test suite</dd></div><div><dt>iOS</dt><dd>Swift keyboard extension — coming soon</dd></div><div><dt>Demo</dt><dd>portfolio.hycyon.com/sanskrit-keyboard.html</dd></div></dl>
+        <p class="cs-links"><a href="https://portfolio.hycyon.com/sanskrit-keyboard.html" rel="noopener">Try the web demo →</a></p>
+      </header>
+      <nav class="cs-toc" aria-label="In this case study"><ol><li><a href="#problem">The language problem</a></li><li><a href="#model">The linguistic model</a></li><li><a href="#architecture">Input architecture</a></li><li><a href="#ux">UX principles</a></li><li><a href="#implementation">Implementation</a></li><li><a href="#challenges">Open problems, stated plainly</a></li><li><a href="#current-state">Current, building, planned</a></li></ol></nav>
+      
+<section class="cs-section" id="problem" aria-labelledby="problem-h">
+  <p class="cs-no" aria-hidden="true">01</p>
+  <div class="cs-body"><h2 id="problem-h">The language problem</h2><p>Devanagari is not an alphabet in the Latin sense. A consonant carries an inherent vowel, a following vowel replaces it with a sign, two consonants can fuse into a conjunct, and anusvara and visarga attach without any of that machinery. A keyboard that only swaps one letter for another cannot get these right.</p><p>On a phone the problem is harder: phonetics, transliteration, the rules of the script and fast lookup all have to work inside the limits of a small keyboard.</p></div>
+</section>
+<section class="cs-section" id="model" aria-labelledby="model-h">
+  <p class="cs-no" aria-hidden="true">02</p>
+  <div class="cs-body"><h2 id="model-h">The linguistic model</h2><p>The engine treats typing as composition, not substitution. Text is normalised, tokenised by greedy longest match (three letters, then two, then one) and composed using the script's rules: a consonant is emitted with a virama; a following vowel replaces the virama with its matra; the inherent a just removes it. Anything that is not language input passes through untouched: spaces, digits, punctuation, emoji, URLs, e-mail addresses, @mentions and #tags.</p><ul><li>Two input schemes: a Harvard-Kyoto style Latin scheme (case-sensitive) and full IAST with diacritics.</li><li>Reverse transliteration from Devanagari back to IAST, with lossless IAST round trips covered by tests.</li></ul></div>
+</section>
+<section class="cs-section" id="architecture" aria-labelledby="architecture-h">
+  <p class="cs-no" aria-hidden="true">03</p>
+  <div class="cs-body"><h2 id="architecture-h">Input architecture</h2><p>The keyboard interface contains no linguistic logic. The engine is a stack of small layers that can change independently.</p><ul><li>Input normalisation: built</li><li>Scheme tables (data only): built</li><li>Tokenise and compose: built</li><li>Reverse transliteration to IAST: built</li><li>Language detection: not built</li><li>Lexicon and dictionary: not built in this engine</li><li>Suggestions: not built</li><li>Correction and undo: not built</li></ul></div>
+</section>
+<section class="cs-section" id="ux" aria-labelledby="ux-h">
+  <p class="cs-no" aria-hidden="true">04</p>
+  <div class="cs-body"><h2 id="ux-h">UX principles</h2><p>Every feature has to make typing faster, more accurate, easier, more natural or more accessible. If it does not, it does not ship.</p><ul><li>Predictable: the same input always gives the same output.</li><li>Recoverable: a user can always get back to what they typed.</li><li>Offline first and private: core transliteration stays on the device, and typed text is not sent anywhere.</li><li>English stays excellent: multilingual must not cost normal keyboard behaviour.</li><li>Few settings, grouped by the questions people ask.</li></ul></div>
+</section>
+<section class="cs-section" id="implementation" aria-labelledby="implementation-h">
+  <p class="cs-no" aria-hidden="true">05</p>
+  <div class="cs-body"><h2 id="implementation-h">Implementation</h2><p>The engine and the web demo are in this repository and share the same code. The engine has a test corpus for Sanskrit words in both schemes, IAST normalisation, scheme detection, reverse transliteration, round trips, punctuation, digits, emoji, URLs and long input, and it checks the examples the page itself displays.</p><p>The iOS keyboard is a Swift keyboard extension with a custom trie and an offline lexicon. Its source is not in this repository, so this study does not describe it beyond that.</p></div>
+</section>
+<section class="cs-section" id="challenges" aria-labelledby="challenges-h">
+  <p class="cs-no" aria-hidden="true">06</p>
+  <div class="cs-body"><h2 id="challenges-h">Open problems, stated plainly</h2><ul><li>No language detection. English typed in Latin mode is transliterated, so Hello becomes Devanagari. Mixed-language typing is the main open problem.</li><li>No Roman Hindi rules. Without schwa deletion, bharat gives भरत rather than भारत. That needs a lexicon, not a rule.</li><li>A vowel after a vowel is kept as hiatus, so boa gives बोअ.</li><li>The Latin scheme was changed to follow common conventions (sh as श, S as ष). If the iOS app used the older mapping, the two must be aligned deliberately.</li></ul></div>
+</section>
+<section class="cs-section" id="current-state" aria-labelledby="current-state-h">
+  <p class="cs-no" aria-hidden="true">07</p>
+  <div class="cs-body"><h2 id="current-state-h">Current, building, planned</h2><div class="cs-sub"><h3>Current</h3><ul><li>Sanskrit transliteration engine, both schemes, with tests.</li><li>Web demo using the same engine.</li></ul></div><div class="cs-sub"><h3>Building</h3><ul><li>Native iOS keyboard (coming soon).</li></ul></div><div class="cs-sub"><h3>Planned, not built</h3><ul><li>Contextual suggestions, language detection and a personal dictionary.</li><li>Deeper Sanskrit morphology and richer dictionaries.</li><li>More Indian languages and scripts, and other Apple platforms.</li></ul></div></div>
+</section>
+    </article>
+    <aside class="cs-more" aria-labelledby="more-h">
+      <h2 id="more-h">More case studies</h2>
+      <ul><li><a href="../ebook-pro/"><strong>eBook Pro</strong><span>Web live · Android in preparation</span></a></li><li><a href="../irons-irony/"><strong>iron's irony</strong><span>Client project</span></a></li></ul>
+      <p class="cs-end">Building something like this? <a href="https://catalogue.hycyon.com/#quote">Start a project with Hycyon</a> or <a href="../../#contact">write to me directly</a>.</p>
+    </aside>
+  </main>
+  <footer class="cs-foot"><p>© 2026 Abhishek Sharma · <a href="https://hycyon.com/">Hycyon</a></p></footer>
+</body>
+</html>
