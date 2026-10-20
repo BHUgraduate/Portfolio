@@ -781,6 +781,8 @@
         <div class="reveal-rows" data-collapsed="false" data-details>
           <div>
             <div class="flex flex-col gap-4 pt-6">
+              <!-- Spam honeypot: invisible to people and assistive tech, bots fill it in -->
+              <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;overflow:hidden"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" data-hp></label></div>
               <div>
                 <label for="f-name" class="block text-sm font-bold text-textmain mb-2">Your name</label>
                 <input class="field" type="text" id="f-name" name="name" autocomplete="name" required aria-describedby="e-name">
@@ -797,8 +799,8 @@
                 <p id="e-msg" class="field-error" hidden></p>
               </div>
               <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-                <button type="submit" class="btn btn-primary w-full sm:w-auto">Write the email</button>
-                <p class="text-xs text-textmuted font-medium leading-relaxed">This opens a draft in your email app. Nothing is sent from this page.</p>
+                <button type="submit" class="btn btn-primary w-full sm:w-auto" data-send>Send message</button>
+                <p class="text-xs text-textmuted font-medium leading-relaxed">Sent to me over HTTPS and used only to reply. If it can’t be sent, a draft opens in your email app instead.</p>
               </div>
               <p id="form-status" role="status" aria-live="polite" class="form-status" hidden></p>
             </div>
