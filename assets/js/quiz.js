@@ -1,7 +1,7 @@
 const QUESTIONS = [
-  { q: 'VaakBoard’s custom engine is built around which data structure?', a: ['Trie', 'Stack', 'Heap'], correct: 0 },
-  { q: 'Which script is Sanskrit most commonly written in today?', a: ['Cyrillic', 'Devanāgarī', 'Hangul'], correct: 1 },
-  { q: 'What does IAST stand for?', a: ['International Alphabet of Sanskrit Transliteration', 'Indian Alphabet Standard Text', 'Internet Alphabet for Script Translation'], correct: 0 },
+  { q: 'A train 120 m long passes a pole in 6 seconds. What is its speed?', a: ['18 m/s', '20 m/s', '24 m/s'], correct: 1 },
+  { q: 'What comes next? 2, 6, 12, 20, …', a: ['28', '30', '32'], correct: 1 },
+  { q: 'What is 25% of 240?', a: ['50', '60', '75'], correct: 1 },
 ];
 
 export function initQuiz() {
