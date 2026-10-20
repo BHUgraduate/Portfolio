@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>eBook Pro: turning reading into knowledge — Abhishek Sharma</title>
+  <meta name="description" content="How eBook Pro was designed and engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB 2/3 parser, on-device OCR and translation, and a server-enforced cloud quota.">
+  <meta name="author" content="Abhishek Sharma">
+  <meta name="theme-color" content="#080C14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://portfolio.hycyon.com/case-studies/ebook-pro/">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abhishek Sharma">
+  <meta property="og:title" content="eBook Pro: turning reading into knowledge">
+  <meta property="og:description" content="A reader for people who study what they read. The case study covers why it is a local-first Flutter app, the three hardest engineering problems, and what the product still does not do.">
+  <meta property="og:url" content="https://portfolio.hycyon.com/case-studies/ebook-pro/">
+  <meta property="og:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="eBook Pro: turning reading into knowledge">
+  <meta name="twitter:description" content="A reader for people who study what they read. The case study covers why it is a local-first Flutter app, the three hardest engineering problems, and what the product still does not do.">
+  <meta name="twitter:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"eBook Pro: turning reading into knowledge","description":"How eBook Pro was designed and engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB 2/3 parser, on-device OCR and translation, and a server-enforced cloud quota.","url":"https://portfolio.hycyon.com/case-studies/ebook-pro/","inLanguage":"en","author":{"@type":"Person","name":"Abhishek Sharma","url":"https://portfolio.hycyon.com/"},"publisher":{"@type":"Organization","name":"Hycyon","url":"https://hycyon.com"},"image":"https://portfolio.hycyon.com/assets/img/og-image.jpg"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/case.css">
+</head>
+<body class="antialiased font-sans">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="cs-bar">
+    <nav class="cs-nav" aria-label="Primary">
+      <a class="cs-home" href="../../">Abhishek Sharma</a>
+      <a href="../../#work">All work</a>
+      <a href="../../#contact" class="cs-cta">Get in touch</a>
+    </nav>
+  </header>
+  <main id="main">
+    <article>
+      <header class="cs-hero">
+        <p class="cs-kicker">Product case study</p>
+        <h1>eBook Pro: turning reading into knowledge</h1>
+        <p class="cs-lede">A reader for people who study what they read. The case study covers why it is a local-first Flutter app, the three hardest engineering problems, and what the product still does not do.</p>
+        <p class="cs-status"><span class="cs-dot live" aria-hidden="true"></span>Web live · Android in preparation</p>
+        <dl class="cs-facts"><div><dt>Role</dt><dd>Product, design and engineering</dd></div><div><dt>Stack</dt><dd>Flutter, Dart, Drift, Firebase, Google ML Kit</dd></div><div><dt>Version</dt><dd>1.5.1 (build 9)</dd></div><div><dt>Links</dt><dd>ebookpro.hycyon.com · ebookpro.web.app</dd></div></dl>
+        <p class="cs-links"><a href="https://ebookpro.hycyon.com/" rel="noopener">Product site →</a><a href="https://ebookpro.web.app/" rel="noopener">Open the web app →</a></p>
+      </header>
+      <nav class="cs-toc" aria-label="In this case study"><ol><li><a href="#problem">The problem</a></li><li><a href="#philosophy">Product philosophy</a></li><li><a href="#ux">UX decisions</a></li><li><a href="#engineering">Engineering</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#hard-problems">The hard problems</a></li><li><a href="#solution">The solution</a></li><li><a href="#current-state">Current state and limits</a></li></ol></nav>
+      
+<section class="cs-section" id="problem" aria-labelledby="problem-h">
+  <p class="cs-no" aria-hidden="true">01</p>
+  <div class="cs-body"><h2 id="problem-h">The problem</h2><p>People who study a book use three tools: a reader, a notebook and a flashcard app. Every highlight has to be copied from the first to the second and again to the third, and scanned or non-English books make each step worse.</p><p>eBook Pro starts from one question: how do you shorten the distance between reading a sentence and understanding it?</p></div>
+</section>
+<section class="cs-section" id="philosophy" aria-labelledby="philosophy-h">
+  <p class="cs-no" aria-hidden="true">02</p>
+  <div class="cs-body"><h2 id="philosophy-h">Product philosophy</h2><p>The product moves in one direction: read, understand, research, annotate, connect, learn, create. Three decisions follow from that.</p><ul><li>Your own files. The reader opens your PDF, EPUB and text files rather than selling a library.</li><li>Local first. Books, progress and notes live in a local SQL database on the device. The network adds features; it is not required to read.</li><li>AI is optional and bounded. It explains a selection. It does not replace reading.</li></ul></div>
+</section>
+<section class="cs-section" id="ux" aria-labelledby="ux-h">
+  <p class="cs-no" aria-hidden="true">03</p>
+  <div class="cs-body"><h2 id="ux-h">UX decisions</h2><ul><li>A page turn with physical shading, written as GLSL fragment shaders, so reading a long book feels like handling a page. This is the reason for Flutter over native.</li><li>Peek-and-pop word lookup and translation, so a lookup does not take the reader out of the page.</li><li>A progress overlay that shows pages left in the chapter and time remaining, and shows a dash until it has enough reading-speed samples rather than a misleading zero.</li><li>Three reading palettes with literary typography and a generous line height.</li><li>Zoom and page turning that never fight each other: paging is disabled while a zoom or selection gesture is active.</li></ul></div>
+</section>
+<section class="cs-section" id="engineering" aria-labelledby="engineering-h">
+  <p class="cs-no" aria-hidden="true">04</p>
+  <div class="cs-body"><h2 id="engineering-h">Engineering</h2><p>One Flutter codebase for web and Android. Native Swift and Kotlin would have meant building every feature twice, and Flutter exposes the shader pipeline the page turn depends on.</p><p>Drift (type-safe SQL) is the local database. The architecture notes record that Isar was considered and rejected because the project had stalled, a decision made after researching it rather than assuming it.</p><p>Firebase supplies authentication, Firestore, Cloud Functions and Cloud Storage. Google ML Kit provides on-device OCR and translation, so scans never leave the device.</p></div>
+</section>
+<section class="cs-section" id="architecture" aria-labelledby="architecture-h">
+  <p class="cs-no" aria-hidden="true">05</p>
+  <div class="cs-body"><h2 id="architecture-h">Architecture</h2><p>Three layers: core (data, parsing, geometry, OCR, services), domain (logic that spans features, such as spaced-repetition scheduling and streaks) and presentation (screens and reader widgets). Repositories are the only code that touches both the database and the domain models, so the rest of the app sees plain objects and streams.</p></div>
+</section>
+<section class="cs-section" id="hard-problems" aria-labelledby="hard-problems-h">
+  <p class="cs-no" aria-hidden="true">06</p>
+  <div class="cs-body"><h2 id="hard-problems-h">The hard problems</h2><div class="cs-sub"><h3>Everything on a page must agree on where things are</h3><p>Native PDF text, OCR words, search matches, selections and the magnifier all draw over the page. If each computed its own coordinates they would drift apart, especially on rotated pages and two-page spreads.</p><p>They all go through one chain: document space, then a normalised upright page space, then the composed frame, then the viewport, then the zoom matrix. The two-page spread layout is defined once and used both for drawing and hit-testing, so painted pages and their text layers cannot disagree. PDF rotation behaviour was verified against real rotated PDFs and unit tested.</p></div><div class="cs-sub"><h3>OCR on a phone without hurting the phone</h3><p>Scanned pages have no text. The text layer checks memory, then a disk cache, then native text, and only then queues OCR. The queue runs one job at a time, newest page first, and drops pages the reader has already left. Parallel OCR was rejected because ML Kit is already multi-threaded and parallel jobs would only compete for memory.</p><p>Results are cached by a fingerprint of the file (size, modified time and the first and last 64 KiB), written atomically and validated on read.</p></div><div class="cs-sub"><h3>EPUB files as they exist in the wild</h3><p>The EPUB pipeline reads EPUB 2 and 3 leniently: case and percent-insensitive archive lookups, tolerant fallbacks for malformed XHTML, fixed-layout detection, embedded fonts and image pages. Reading positions are stored as EPUB CFIs so a position survives re-layout.</p><p>A deliberate trade-off: the publisher's CSS is not applied to reflowable text. The app's own typography is used, which keeps reading consistent but means some publisher styling is lost.</p></div><div class="cs-sub"><h3>Cost and trust of AI features</h3><p>AI answers are cached by a hash of the prompt so the first request pays and later ones do not. An early version limited daily use with a client-side counter. The architecture notes say plainly that a modified client could skip it, and name server-side enforcement as the real fix.</p><p>The cloud storage quota added in 1.5.1 is enforced on the server: an upload needs a reservation made inside a transaction, and storage rules accept only that path at exactly that size before the reservation expires. Clients cannot write reservations.</p></div></div>
+</section>
+<section class="cs-section" id="solution" aria-labelledby="solution-h">
+  <p class="cs-no" aria-hidden="true">07</p>
+  <div class="cs-body"><h2 id="solution-h">The solution</h2><p>Today the product reads PDF, EPUB and text files; recognises text in scans in Latin and Devanagari scripts on the device; translates on the device; turns highlights into notes and spaced-repetition flashcards; offers AI explanations of a selection; and has a notes and writing workspace, accounts, and a Free and Premium plan.</p></div>
+</section>
+<section class="cs-section" id="current-state" aria-labelledby="current-state-h">
+  <p class="cs-no" aria-hidden="true">08</p>
+  <div class="cs-body"><h2 id="current-state-h">Current state and limits</h2><ul><li>Web app: live. Android: in preparation. iOS has not been built in the development environment.</li><li>OCR recognises Latin and Devanagari only. Hindi OCR was verified on an emulator with a generated page, not on a corpus of real scans.</li><li>Publisher CSS, MathML typesetting, audio and video, and tappable in-text links in EPUBs are not supported.</li><li>No download, rating or review figures are shown here because none have been verified.</li></ul></div>
+</section>
+    </article>
+    <aside class="cs-more" aria-labelledby="more-h">
+      <h2 id="more-h">More case studies</h2>
+      <ul><li><a href="../vaakboard/"><strong>VaakBoard</strong><span>iOS keyboard coming soon · engine and web demo working</span></a></li><li><a href="../irons-irony/"><strong>iron's irony</strong><span>Client project</span></a></li></ul>
+      <p class="cs-end">Building something like this? <a href="https://catalogue.hycyon.com/#quote-section">Start a project with Hycyon</a> or <a href="../../#contact">write to me directly</a>.</p>
+    </aside>
+  </main>
+  <footer class="cs-foot"><p>© 2026 Abhishek Sharma · <a href="https://hycyon.com/">Hycyon</a></p></footer>
+</body>
+</html>
