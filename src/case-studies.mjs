@@ -265,6 +265,7 @@ export const caseStudies = [
           'Server-side validation with the same schema as the browser, a same-origin check, rate limiting and a honeypot against spam.',
           'If no enquiry destination is configured, the form says plainly that nothing was sent and offers WhatsApp, phone and email with the visitor\'s brief already written.',
           'A rule-based project assistant that answers only from the site\'s own content, never quotes prices or timelines, and says when it does not know. It is not AI.',
+          'A feedback page where people who have worked with the business can say how it went. Nothing is published automatically: the owner confirms it is genuine, the person chooses full name, first name only or private, and a deploy-time check refuses unsafe entries. The wall of feedback stays empty until real words exist.',
         ],
       },
       {
@@ -277,7 +278,7 @@ export const caseStudies = [
         title: 'Result',
         text: [
           'There are no results to report yet, and none are invented. No enquiry counts, conversion figures or customer feedback exist.',
-          'What exists is the structure for evidence: each project can be switched from a representative drawing to a real completed project by adding a photograph and true facts. The most valuable next step is real proof: actual installations, photographs, project details and customer words.',
+          'What exists is the structure for evidence: each project can be switched from a representative drawing to a real completed project by adding a photograph and true facts, and customers can submit feedback that appears on the site once confirmed. The most valuable next step is real proof: actual installations, photographs, project details and customer words.',
         ],
       },
     ],
