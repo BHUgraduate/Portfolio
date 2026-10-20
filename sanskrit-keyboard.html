@@ -185,88 +185,10 @@
   <!-- Hidden input to capture physical keyboard if needed -->
   <input type="text" id="hidden-input" class="opacity-0 absolute -top-10" autocomplete="off" autocorrect="off" spellcheck="false">
 
-  <script>
-    /* =====================================================================
-       1. ROBUST TRANSLITERATION ENGINE (Harvard-Kyoto / IAST Mapping)
-       ===================================================================== */
-    
-    // Core maps. We use strict longest-match token parsing.
-    const mappings = {
-      // Consonants (mapped to base character + virama/halant)
-      consonants: {
-        'ksh':'क्ष्', 'shr':'श्र्', 'tr':'त्र्', 'gy':'ज्ञ्',
-        'kh':'ख्', 'gh':'घ्', 'ch':'छ्', 'jh':'झ्', 'Th':'ठ्', 'Dh':'ढ्', 'th':'थ्', 'dh':'ध्', 'ph':'फ्', 'bh':'भ्', 'sh':'ष्',
-        'k':'क्', 'g':'ग्', 'c':'च्', 'j':'ज्', 'T':'ट्', 'D':'ड्', 'N':'ण्', 't':'त्', 'd':'द्', 'n':'न्', 'p':'प्', 'b':'ब्', 'm':'म्',
-        'y':'य्', 'r':'र्', 'l':'ल्', 'v':'व्', 'w':'व्', 'S':'श्', 's':'स्', 'h':'ह्'
-      },
-      // Independent Vowels (Start of word or after another vowel)
-      indVowels: {
-        'aa':'आ', 'ii':'ई', 'uu':'ऊ', 'ai':'ऐ', 'au':'औ', 
-        'a':'अ', 'i':'इ', 'I':'ई', 'u':'उ', 'U':'ऊ', 'e':'ए', 'o':'ओ', 'R':'ऋ'
-      },
-      // Dependent Vowels / Matras (After a consonant)
-      depVowels: {
-        'aa':'ा', 'ii':'ी', 'uu':'ू', 'ai':'ै', 'au':'ौ', 
-        'a':'', /* removes halant */ 'i':'ि', 'I':'ी', 'u':'ु', 'U':'ू', 'e':'े', 'o':'ो', 'R':'ृ'
-      },
-      // Modifiers
-      modifiers: {
-        'M':'ं', 'H':'ः'
-      }
-    };
-
-    /**
-     * Engine: Transliterates a buffer of Latin characters into Devanagari.
-     * Uses state-tracking to perfectly handle viramas (halants) and vowel positioning.
-     */
-    function processLatin(text) {
-      if (!text) return "";
-      let result = '';
-      let i = 0;
-      let lastWasConsonant = false;
-
-      while (i < text.length) {
-        let matchLen = 0;
-        let type = '';
-        let val = '';
-
-        // Greedy match: Check 3-char, then 2-char, then 1-char tokens
-        for (let len = 3; len > 0; len--) {
-          if (i + len > text.length) continue;
-          let chunk = text.substr(i, len);
-          
-          if (mappings.consonants[chunk]) { val = mappings.consonants[chunk]; type = 'C'; matchLen = len; break; }
-          if (mappings.indVowels[chunk]) { val = chunk; type = 'V'; matchLen = len; break; }
-          if (mappings.modifiers[chunk]) { val = mappings.modifiers[chunk]; type = 'M'; matchLen = len; break; }
-        }
-
-        if (matchLen > 0) {
-          if (type === 'C') {
-            result += val;
-            lastWasConsonant = true;
-          } else if (type === 'V') {
-            if (lastWasConsonant) {
-              // Vowel follows a consonant: Remove the halant (last char of result) and add the Matra
-              result = result.slice(0, -1);
-              result += mappings.depVowels[val];
-            } else {
-              // Vowel follows a space or another vowel: Add independent vowel
-              result += mappings.indVowels[val];
-            }
-            lastWasConsonant = false;
-          } else if (type === 'M') {
-            result += val; // Add Anusvara/Visarga directly
-          }
-          i += matchLen;
-        } else {
-          // Unrecognized character (spaces, punctuation, numbers) - pass through exactly
-          result += text[i];
-          lastWasConsonant = false;
-          i++;
-        }
-      }
-      return result;
-    }
+  <script type="module">
+    /* The transliteration engine now lives in assets/js/vaak/ (shared with the portfolio page and covered by tests/). */
+    import { transliterate } from './assets/js/vaak/index.js';
+    const processLatin = (text) => transliterate(text, { scheme: 'latin' }).text;
 
     /* =====================================================================
        2. STATE & UI MANAGEMENT

@@ -6,7 +6,8 @@ import { initVaak } from './vaak.js';
 import { initQuiz } from './quiz.js';
 import { initReader } from './reader.js';
 import { initContact } from './contact.js';
+import { initCapabilities } from './capabilities.js';
 
-[initNav, initReveal, initEffects, initStory, initVaak, initQuiz, initReader, initContact].forEach((init) => {
+[initNav, initReveal, initEffects, initStory, initVaak, initQuiz, initReader, initCapabilities, initContact].forEach((init) => {
   try { init(); } catch (err) { console.error(`[portfolio] ${init.name} failed`, err); }
 });

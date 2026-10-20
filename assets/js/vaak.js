@@ -1,64 +1,89 @@
-import { transliterate } from './translit.js';
+import { transliterate, toIast } from './vaak/index.js';
 import { prefersReduced } from './env.js';
 
 const SAMPLE = 'saMskRtam';
+/* Combining signs need a base to read clearly on their own, so they are shown on a dotted circle. */
+const shown = (piece) => (/^[\u0900-\u0903\u093A-\u094F\u0962\u0963]/.test(piece) ? `\u25CC${piece}` : piece);
+const SCHEME_LABEL = { latin: 'Latin scheme', iast: 'IAST scheme' };
 
+/* The portfolio demo runs the real engine (assets/js/vaak/). Every number and glyph below comes from its output. */
 export function initVaak() {
   const root = document.querySelector('[data-vaak]');
   if (!root) return;
   const input = root.querySelector('[data-vaak-input]');
-  const keys = root.querySelector('[data-vaak-keys]');
   const out = root.querySelector('[data-vaak-out]');
+  const iast = root.querySelector('[data-vaak-iast]');
+  const trace = root.querySelector('[data-vaak-trace]');
+  const scheme = root.querySelector('[data-vaak-scheme]');
   const replay = root.querySelector('[data-vaak-replay]');
-  let timer = null, touched = false;
+  const stages = Object.fromEntries([...document.querySelectorAll('[data-stage]')].map((el) => [el.dataset.stage, el]));
+  let timer = null, touched = false, lastCount = 0;
 
-  /* Live region only after the visitor takes over; otherwise autoplay would be announced letter by letter. */
-  out.removeAttribute('aria-live');
+  /* Announce results only once the visitor takes over; autoplay would otherwise be read out letter by letter. */
+  const setLive = (on) => on ? out.setAttribute('aria-live', 'polite') : out.removeAttribute('aria-live');
+  setLive(false);
 
-  function render(hit) {
-    out.textContent = transliterate(input.value) || '—';
-    const chars = [...input.value].slice(-8);
-    keys.replaceChildren(...chars.map((c, i) => {
-      const k = document.createElement('span');
-      k.className = 'keycap' + (hit && i === chars.length - 1 ? ' is-hit' : '');
-      k.textContent = c === ' ' ? '␣' : c;
-      return k;
-    }));
+  function tokenChip(t, isNew) {
+    const li = document.createElement('li');
+    li.className = 'trace-tok' + (isNew ? ' is-new' : '');
+    li.dataset.kind = t.kind;
+    const src = document.createElement('span'); src.className = 'trace-src'; src.textContent = t.src === ' ' ? '␣' : t.src;
+    const o = document.createElement('span'); o.className = 'trace-out';
+    if (t.inherent) o.textContent = 'inherent a';
+    else if (t.kind === 'X') o.textContent = 'kept';
+    else { o.classList.add('deva-out'); o.textContent = shown(t.piece); }
+    li.append(src, o);
+    return li;
+  }
+
+  function render() {
+    const r = transliterate(input.value);
+    const roman = toIast(r.text);
+    out.textContent = r.text || '—';
+    iast.textContent = roman || '—';
+    scheme.textContent = SCHEME_LABEL[r.scheme];
+    const visible = r.tokens.filter((t) => !/^\s+$/.test(t.src)).slice(-14);
+    trace.replaceChildren(...visible.map((t, i) => tokenChip(t, i === visible.length - 1 && r.tokens.length > lastCount)));
+    lastCount = r.tokens.length;
+    if (stages.input) {
+      stages.input.textContent = input.value || '—';
+      stages.normalize.textContent = r.normalized === input.value ? SCHEME_LABEL[r.scheme] : `${r.normalized} · ${SCHEME_LABEL[r.scheme]}`;
+      stages.tokenize.textContent = visible.map((t) => t.src).join(' · ') || '—';
+      stages.compose.textContent = visible.map((t) => (t.inherent ? 'अ' : shown(t.piece))).join(' ') || '—';
+      stages.output.textContent = r.text || '—';
+    }
   }
 
   const stop = () => { clearTimeout(timer); timer = null; };
 
   function play(text) {
     stop();
-    if (prefersReduced()) { input.value = text; render(false); return; }
+    if (prefersReduced()) { input.value = text; render(); return; }
     input.value = '';
-    render(false);
+    lastCount = 0; render();
     let n = 0;
     const step = () => {
       n++;
-      input.value = text.slice(0, n);
-      render(true);
-      if (n < text.length) timer = setTimeout(step, 120);
+      input.value = [...text].slice(0, n).join('');
+      render();
+      if (n < [...text].length) timer = setTimeout(step, 120);
     };
     timer = setTimeout(step, 250);
   }
 
-  input.addEventListener('input', () => {
-    stop();
-    if (!touched) { touched = true; out.setAttribute('aria-live', 'polite'); }
-    render(true);
-  });
+  const takeOver = () => { touched = true; setLive(true); };
+  input.addEventListener('input', () => { stop(); takeOver(); render(); });
   root.querySelectorAll('[data-vaak-sample]').forEach((b) =>
-    b.addEventListener('click', () => { touched = true; out.setAttribute('aria-live', 'polite'); play(b.dataset.vaakSample); }));
+    b.addEventListener('click', () => { takeOver(); play(b.dataset.vaakSample); }));
   replay.addEventListener('click', () => play(SAMPLE));
 
-  render(false);
+  render();
 
-  /* Type the sample once, the first time the preview is on screen. */
-  if (!prefersReduced()) {
+  /* Type the sample once, the first time the demo is on screen. */
+  if (!prefersReduced() && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) { io.disconnect(); if (!touched && document.activeElement !== input) play(SAMPLE); }
-    }, { threshold: 0.6 });
+    }, { threshold: 0.5 });
     io.observe(root);
   }
 }

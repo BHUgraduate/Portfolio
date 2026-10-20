@@ -76,7 +76,11 @@
   <link rel="modulepreload" href="assets/js/quiz.js">
   <link rel="modulepreload" href="assets/js/reader.js">
   <link rel="modulepreload" href="assets/js/contact.js">
-  <link rel="modulepreload" href="assets/js/translit.js">
+  <link rel="modulepreload" href="assets/js/vaak/index.js">
+  <link rel="modulepreload" href="assets/js/vaak/transliterate.js">
+  <link rel="modulepreload" href="assets/js/vaak/normalize.js">
+  <link rel="modulepreload" href="assets/js/vaak/schemes.js">
+  <link rel="modulepreload" href="assets/js/capabilities.js">
   <link rel="modulepreload" href="assets/js/env.js">
   <noscript><style>.js .reveal{opacity:1;transform:none}</style></noscript>
 </head>
@@ -196,74 +200,181 @@
       <div class="text-center mb-12 sm:mb-16 reveal">
         <span class="eyebrow eyebrow-accent">WORK</span>
         <h2 id="work-title" class="section-title mb-4">Products I’m building</h2>
-        <p class="section-lede mx-auto">BrainSparkOS and Ebook Pro are live on the web. VaakBoard is coming soon to iOS. Try the previews; they’re small, but they work.</p>
+        <p class="section-lede mx-auto">Three products, three different problems. BrainSparkOS and Ebook Pro are live on the web. VaakBoard is coming soon to iOS, and its engine already runs below.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        <!-- VaakBoard -->
-        <article id="vaakboard" class="card group lg:col-span-2 p-6 sm:p-8 md:p-10 reveal" data-spotlight>
-          <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div>
-              <div class="flex items-center gap-4 mb-6">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 text-accent-ink flex items-center justify-center text-2xl sm:text-3xl font-bold font-deva border border-accent/20 shadow-inner" aria-hidden="true">वा</div>
-                <div>
-                  <p class="meta-label">Language technology · iOS</p>
-                  <span class="badge mt-2 bg-amber-500/10 text-amber-ink border-amber-500/25"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>Coming soon</span>
-                </div>
+        <!-- ───────── 01 · VaakBoard (flagship) ───────── -->
+        <article id="vaakboard" class="card proj lg:col-span-2 p-6 sm:p-10 lg:p-12 reveal" style="--pc:#6366F1" data-spotlight aria-labelledby="vaak-title">
+          <header class="mb-8 sm:mb-10 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+              <span class="proj-no">01</span>
+              <p class="meta-label">Language technology · Native iOS</p>
+              <span class="badge bg-amber-500/10 text-amber-ink border-amber-500/25"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>Coming soon</span>
+            </div>
+            <h3 id="vaak-title" class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-textmain tracking-tight mb-4">VaakBoard</h3>
+            <p class="font-display font-bold text-xl sm:text-2xl text-textmain leading-snug mb-4 text-balance">Typing Sanskrit should feel like typing, not transliterating.</p>
+            <p class="text-textmuted text-base sm:text-lg leading-relaxed font-medium">An iOS keyboard with its own input engine. Latin letters in, correct Devanāgarī out, with an offline Sanskrit lexicon behind it. This isn’t a restyled layout.</p>
+          </header>
+
+          <!-- The demo: the real engine, running in the page -->
+          <div class="vaak-stage rounded-2xl border border-border bg-surface2/60 p-4 sm:p-6 lg:p-8" data-vaak>
+            <div class="flex items-center justify-between gap-4 mb-4">
+              <p class="meta-label" id="vaak-label">Live engine · type, it runs here</p>
+              <div class="flex items-center gap-3">
+                <span class="chip" data-vaak-scheme>Latin</span>
+                <button type="button" class="link-quiet !min-h-[40px] no-underline hover:underline" data-vaak-replay>Replay</button>
               </div>
-              <h3 class="font-display font-bold text-3xl sm:text-4xl text-textmain mb-4">VaakBoard</h3>
-              <p class="text-textmain text-base sm:text-lg font-medium leading-relaxed mb-3 max-w-xl">
-                Typing Sanskrit on a phone is slow. VaakBoard is an iOS keyboard with its own input engine: Latin letters become Devanāgarī as you type.
-              </p>
-              <p class="text-textmuted text-sm sm:text-base leading-relaxed mb-6 max-w-xl font-medium">
-                Not a restyled layout. I built the engine itself in Swift: a custom trie, IAST transliteration, phonetic mapping to Devanāgarī and a full offline Sanskrit lexicon.
-              </p>
-              <ul class="flex flex-wrap gap-2 mb-8" aria-label="Technologies">
-                <li class="chip">Swift</li><li class="chip">CoreData</li><li class="chip">App Extension</li>
-              </ul>
-              <a href="sanskrit-keyboard.html" class="btn btn-primary btn-sm w-full sm:w-auto">
-                Try the web demo
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-              </a>
             </div>
 
-            <!-- Live transliteration preview: runs the same mapping as the web demo -->
-            <div class="rounded-2xl border border-border bg-surface2/60 p-4 sm:p-6" data-vaak>
-              <div class="flex items-center justify-between mb-4">
-                <p class="meta-label" id="vaak-label">Live preview · try typing</p>
-                <button type="button" class="link-quiet !min-h-[32px] no-underline hover:underline" data-vaak-replay>Replay</button>
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+              <div class="flex flex-col">
+                <label for="vaak-input" class="block text-sm font-bold text-textmain mb-2">You type</label>
+                <input id="vaak-input" type="text" value="saMskRtam" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="vaak-hint" aria-controls="vaak-out" class="field font-mono !text-lg mb-4" data-vaak-input>
+                <p class="meta-label mb-2">How it was read</p>
+                <ol class="trace flex flex-wrap gap-1.5 list-none p-0 m-0 min-h-[3.25rem]" aria-label="Token breakdown" data-vaak-trace>
+                  <li class="trace-tok"><span class="trace-src">s</span><span class="trace-out deva-out">स्</span></li>
+                  <li class="trace-tok"><span class="trace-src">a</span><span class="trace-out">inherent a</span></li>
+                  <li class="trace-tok"><span class="trace-src">M</span><span class="trace-out deva-out">ं</span></li>
+                  <li class="trace-tok"><span class="trace-src">s</span><span class="trace-out deva-out">स्</span></li>
+                  <li class="trace-tok"><span class="trace-src">k</span><span class="trace-out deva-out">क्</span></li>
+                  <li class="trace-tok"><span class="trace-src">R</span><span class="trace-out deva-out">ृ</span></li>
+                  <li class="trace-tok"><span class="trace-src">t</span><span class="trace-out deva-out">त्</span></li>
+                  <li class="trace-tok"><span class="trace-src">a</span><span class="trace-out">inherent a</span></li>
+                  <li class="trace-tok"><span class="trace-src">m</span><span class="trace-out deva-out">म्</span></li>
+                </ol>
               </div>
-              <label for="vaak-input" class="sr-only">Type Latin letters, for example saMskRtam</label>
-              <input id="vaak-input" type="text" value="saMskRtam" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="vaak-hint vaak-out" class="field font-mono !text-base mb-3" data-vaak-input>
-              <div class="flex flex-wrap gap-1.5 min-h-[2.4rem] mb-4" aria-hidden="true" data-vaak-keys></div>
-              <div class="rounded-xl bg-surface border border-border px-4 py-5 sm:py-6 text-center">
-                <p id="vaak-out" class="deva-out font-bold text-4xl sm:text-5xl text-textmain leading-tight break-words min-h-[1.3em]" lang="sa" aria-live="polite" data-vaak-out>संस्कृतम्</p>
+
+              <div class="rounded-xl bg-surface border border-border px-4 py-6 sm:py-8 flex flex-col items-center justify-center text-center">
+                <p class="meta-label mb-3">Devanāgarī</p>
+                <p id="vaak-out" class="deva-out font-bold text-5xl sm:text-6xl text-textmain leading-tight break-words max-w-full" lang="sa" data-vaak-out>संस्कृतम्</p>
+                <p class="meta-label mt-5 mb-1">IAST</p>
+                <p class="font-mono text-lg sm:text-xl text-textmuted font-bold break-words max-w-full" lang="sa-Latn" data-vaak-iast>saṃskṛtam</p>
               </div>
-              <p id="vaak-hint" class="mt-3 text-xs text-textmuted font-medium leading-relaxed">
-                Try: <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="sarasvatii">sarasvatii</button>,
-                <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="bhaaratam">bhaaratam</button>,
-                <button type="button" class="font-mono font-bold underline decoration-border underline-offset-4 hover:text-textmain min-h-[32px] px-1" data-vaak-sample="dharmakshetre">dharmakshetre</button>.
-                Case matters: <span class="font-mono font-bold">M</span> adds ◌ं, <span class="font-mono font-bold">R</span> gives ऋ, <span class="font-mono font-bold">T D N</span> are retroflex.
-              </p>
+            </div>
+
+            <div id="vaak-hint" class="mt-6">
+              <p class="meta-label mb-2">Try these (IAST works too)</p>
+              <ul class="flex flex-wrap gap-2 list-none p-0 m-0">
+                <li><button type="button" class="sample" data-vaak-sample="saMskRtam" data-expect="संस्कृतम्"><span class="font-mono">saMskRtam</span><span aria-hidden="true">→</span><span class="deva-out" lang="sa">संस्कृतम्</span></button></li>
+                <li><button type="button" class="sample" data-vaak-sample="sarasvatii" data-expect="सरस्वती"><span class="font-mono">sarasvatii</span><span aria-hidden="true">→</span><span class="deva-out" lang="sa">सरस्वती</span></button></li>
+                <li><button type="button" class="sample" data-vaak-sample="bhaaratam" data-expect="भारतम्"><span class="font-mono">bhaaratam</span><span aria-hidden="true">→</span><span class="deva-out" lang="sa">भारतम्</span></button></li>
+                <li><button type="button" class="sample" data-vaak-sample="dharmakshetre" data-expect="धर्मक्षेत्रे"><span class="font-mono">dharmakshetre</span><span aria-hidden="true">→</span><span class="deva-out" lang="sa">धर्मक्षेत्रे</span></button></li>
+                <li><button type="button" class="sample" data-vaak-sample="śāntiḥ" data-expect="शान्तिः"><span class="font-mono">śāntiḥ</span><span aria-hidden="true">→</span><span class="deva-out" lang="sa">शान्तिः</span></button></li>
+              </ul>
+              <p class="mt-4 text-xs text-textmuted font-medium leading-relaxed max-w-2xl">Case matters in the Latin scheme: <span class="font-mono font-bold">M</span> is anusvāra, <span class="font-mono font-bold">H</span> visarga, <span class="font-mono font-bold">R</span> is ṛ, <span class="font-mono font-bold">T D N</span> are retroflex, <span class="font-mono font-bold">aa ii uu</span> are long vowels. Everything runs in your browser. Nothing you type is sent anywhere.</p>
+            </div>
+          </div>
+
+          <!-- Why it's hard -->
+          <div class="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-12 mt-10 sm:mt-14">
+            <div>
+              <p class="meta-label mb-3">The problem</p>
+              <h4 class="font-display font-bold text-2xl text-textmain mb-3 text-balance">Typing Sanskrit on a phone isn’t a layout problem.</h4>
+              <p class="text-textmuted text-base leading-relaxed font-medium">It’s phonetics, transliteration, the rules of Devanāgarī and fast lookup, all inside the limits of a phone keyboard.</p>
+            </div>
+            <ul class="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
+              <li class="why-item"><p class="meta-label mb-1">Phonetics</p><p>Type the sounds. The engine finds the letters.</p></li>
+              <li class="why-item"><p class="meta-label mb-1">Transliteration</p><p>Latin and IAST in, Devanāgarī out, and back again.</p></li>
+              <li class="why-item"><p class="meta-label mb-1">Script rules</p><p>A consonant carries a virama until a vowel replaces it with the right matra.</p></li>
+              <li class="why-item"><p class="meta-label mb-1">Local lookup</p><p>A custom trie and an offline lexicon, so typing never waits on a network.</p></li>
+            </ul>
+          </div>
+
+          <!-- Under the hood (progressive disclosure) -->
+          <details class="hood mt-10 sm:mt-14" data-hood>
+            <summary class="hood-summary">
+              <span><span class="meta-label block mb-1">Under the hood</span><span class="font-display font-bold text-lg text-textmain">How the engine gets from letters to a word</span></span>
+              <span class="hood-chev" aria-hidden="true"></span>
+            </summary>
+            <div class="hood-body">
+              <p class="text-sm text-textmuted font-medium mb-5 max-w-2xl">These five stages are the demo’s actual code, so the values update as you type above.</p>
+              <ol class="pipe list-none p-0 m-0" data-vaak-pipe>
+                <li class="pipe-step"><p class="pipe-name"><span>1</span>Input</p><p class="pipe-val font-mono" data-stage="input">saMskRtam</p><p class="pipe-note">Raw characters, as typed.</p></li>
+                <li class="pipe-step"><p class="pipe-name"><span>2</span>Normalise</p><p class="pipe-val font-mono" data-stage="normalize">Latin scheme</p><p class="pipe-note">Unicode forms made equal, IAST detected.</p></li>
+                <li class="pipe-step"><p class="pipe-name"><span>3</span>Tokenise</p><p class="pipe-val font-mono" data-stage="tokenize">s · a · M · s · k · R · t · a · m</p><p class="pipe-note">Longest match first: three letters, then two, then one.</p></li>
+                <li class="pipe-step"><p class="pipe-name"><span>4</span>Compose</p><p class="pipe-val deva-out" data-stage="compose">स् अ ं स् क् ृ त् अ म्</p><p class="pipe-note">Consonants take a virama; a vowel replaces it with a matra.</p></li>
+                <li class="pipe-step"><p class="pipe-name"><span>5</span>Output</p><p class="pipe-val deva-out" data-stage="output">संस्कृतम्</p><p class="pipe-note">Devanāgarī, plus IAST on request.</p></li>
+              </ol>
+
+              <div class="device mt-8">
+                <p class="device-label">Inside the iOS app</p>
+                <ul class="device-list list-none p-0 m-0">
+                  <li><strong>Keyboard extension</strong><span>Swift, runs inside any app</span></li>
+                  <li><strong>Transliteration</strong><span>Latin and IAST to Devanāgarī</span></li>
+                  <li><strong>Trie engine</strong><span>Fast prefix matching</span></li>
+                  <li><strong>Sanskrit lexicon</strong><span>Stored on the device</span></li>
+                </ul>
+                <p class="device-foot">The lexicon works offline. The app’s source isn’t published, so this panel shows structure, not code.</p>
+              </div>
+            </div>
+          </details>
+
+          <!-- Why I built this -->
+          <figure class="why-built mt-10 sm:mt-14">
+            <p class="meta-label mb-3">Why I built it</p>
+            <blockquote class="font-display font-bold text-xl sm:text-2xl text-textmain leading-snug text-balance max-w-3xl">I study Sanskrit and I build software. VaakBoard is where the two met: a keyboard for a language I was learning, made with the engineering I was learning beside it.</blockquote>
+          </figure>
+
+          <!-- Current / Building / Vision -->
+          <div class="mt-10 sm:mt-14">
+            <p class="meta-label mb-4">Where it stands</p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <section class="stage-card" aria-labelledby="st-current">
+                <h4 id="st-current" class="stage-tag stage-current">Current</h4>
+                <ul class="stage-list">
+                  <li>A working engine: Latin and IAST in, Devanāgarī and IAST out</li>
+                  <li>An automated test suite for the engine</li>
+                  <li>iOS keyboard in Swift with an offline lexicon: coming soon</li>
+                </ul>
+              </section>
+              <section class="stage-card" aria-labelledby="st-building">
+                <h4 id="st-building" class="stage-tag stage-building">Building</h4>
+                <ul class="stage-list">
+                  <li>The engine as separate layers: normalisation, schemes, transliteration</li>
+                  <li>A written product spec: principles, architecture, roadmap, test corpus</li>
+                </ul>
+              </section>
+              <section class="stage-card" aria-labelledby="st-vision">
+                <h4 id="st-vision" class="stage-tag stage-vision">Vision · not built yet</h4>
+                <ul class="stage-list">
+                  <li>One keyboard for English, Hindi and Sanskrit, without mode-switching</li>
+                  <li>Mixed-language typing, context-aware suggestions, easy error recovery</li>
+                  <li>Private and offline-first by design</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+
+          <div class="mt-10 sm:mt-12 pt-8 border-t border-border flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <ul class="flex flex-wrap gap-2 list-none p-0 m-0" aria-label="Technologies">
+              <li class="chip">Swift</li><li class="chip">Keyboard extension</li><li class="chip">CoreData</li><li class="chip">Custom trie</li><li class="chip">Offline lexicon</li><li class="chip">IAST</li><li class="chip">Devanāgarī</li>
+            </ul>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="sanskrit-keyboard.html" class="btn btn-primary btn-sm">Try the full web demo
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+              <a href="https://github.com/BHUgraduate/Portfolio/blob/main/docs/VAAKBOARD.md" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">Read the product notes <span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
         </article>
 
-        <!-- BrainSparkOS -->
-        <article id="brainspark" class="card group p-6 sm:p-8 flex flex-col reveal delay-100" data-spotlight>
-          <div class="flex items-center gap-4 mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-ink flex items-center justify-center border border-amber-500/20 shadow-inner" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
-            </div>
-            <div>
-              <p class="meta-label">EdTech · Web</p>
-              <span class="badge mt-2 bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Live</span>
-            </div>
+        <!-- ───────── 02 · BrainSparkOS ───────── -->
+        <article id="brainspark" class="card proj p-6 sm:p-8 flex flex-col reveal delay-100" style="--pc:#F59E0B" data-spotlight aria-labelledby="brain-title">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+            <span class="proj-no">02</span>
+            <p class="meta-label">Exam prep · AI · Web</p>
+            <span class="badge bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Live · v1.0</span>
           </div>
-          <h3 class="font-display font-bold text-2xl text-textmain mb-3">BrainSparkOS</h3>
-          <p class="text-textmain text-base font-medium leading-relaxed mb-2">A quiz platform for students.</p>
-          <p class="text-textmuted text-sm leading-relaxed mb-5 font-medium">What I built: a dynamic question engine, gamified rounds and leaderboards.</p>
+          <h3 id="brain-title" class="font-display font-bold text-3xl text-textmain mb-3">BrainSparkOS</h3>
+          <p class="text-textmain text-base font-medium leading-relaxed mb-5">An AI-assisted exam-prep app. Build a mock test from your own topics, then ask a tutor to explain every answer.</p>
+
+          <dl class="qa mb-5">
+            <div><dt>Solves</dt><dd>Practice tests that match your syllabus, with an explanation for each wrong answer.</dd></div>
+            <div><dt>Built</dt><dd>A Flutter app and Firebase Cloud Functions that call Gemini on the server. Mock-test generator, offline practice, reminders, English and Hindi.</dd></div>
+            <div><dt>Interesting</dt><dd>It generates SVG diagrams for reasoning questions, and the API key never reaches the device.</dd></div>
+          </dl>
 
           <!-- Quiz interaction sketch -->
           <div class="rounded-2xl border border-border bg-surface2/60 p-4 mb-5" data-quiz>
@@ -271,32 +382,33 @@
               <p class="meta-label">Interaction sketch</p>
               <p class="font-mono text-xs font-bold text-amber-ink" aria-live="polite">Score <span data-quiz-score>0</span>/<span data-quiz-total>0</span></p>
             </div>
-            <p id="quiz-q" class="font-display font-bold text-base text-textmain mb-3" data-quiz-q>Which data structure powers VaakBoard’s lookup engine?</p>
+            <p id="quiz-q" class="font-display font-bold text-base text-textmain mb-3" data-quiz-q>A train 120 m long passes a pole in 6 seconds. What is its speed?</p>
             <div role="group" aria-labelledby="quiz-q" class="grid gap-2" data-quiz-opts></div>
             <p class="mt-3 text-xs font-medium text-textmuted min-h-[1.25rem]" aria-live="polite" data-quiz-msg></p>
           </div>
 
-          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">React</li><li class="chip">Gamification</li></ul>
+          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">Flutter</li><li class="chip">Dart</li><li class="chip">Firebase Functions</li><li class="chip">Gemini</li></ul>
           <a href="https://brainsparkos.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-sm mt-auto w-full bg-amber-500/10 border border-amber-500/25 text-amber-ink hover:bg-amber-500/20">
             Open BrainSparkOS <span class="sr-only">(opens in a new tab)</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </article>
 
-        <!-- Ebook Pro -->
-        <article id="ebookpro" class="card group p-6 sm:p-8 flex flex-col reveal delay-200" data-spotlight>
-          <div class="flex items-center gap-4 mb-5">
-            <div class="w-12 h-12 rounded-2xl bg-teal/10 text-teal-ink flex items-center justify-center border border-teal/20 shadow-inner" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
-            <div>
-              <p class="meta-label">Reading &amp; research · Web</p>
-              <span class="badge mt-2 bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Live</span>
-            </div>
+        <!-- ───────── 03 · Ebook Pro ───────── -->
+        <article id="ebookpro" class="card proj p-6 sm:p-8 flex flex-col reveal delay-200" style="--pc:#2DD4BF" data-spotlight aria-labelledby="ebook-title">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+            <span class="proj-no">03</span>
+            <p class="meta-label">Reading · Research · Web &amp; Android</p>
+            <span class="badge bg-emerald-500/10 text-green-ink border-emerald-500/25"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>Web live · Android in preparation</span>
           </div>
-          <h3 class="font-display font-bold text-2xl text-textmain mb-3">Ebook Pro</h3>
-          <p class="text-textmain text-base font-medium leading-relaxed mb-2">A web reader for studying, not just reading: open a PDF or EPUB, then annotate, translate and ask questions in place.</p>
-          <p class="text-textmuted text-sm leading-relaxed mb-5 font-medium">What I built: PDF and EPUB reading, highlights and annotation, OCR for scanned pages, translation, Wikipedia lookup, AI explanations, and tools for writing and publishing.</p>
+          <h3 id="ebook-title" class="font-display font-bold text-3xl text-textmain mb-3">Ebook Pro</h3>
+          <p class="text-textmain text-base font-medium leading-relaxed mb-5">A reader for people who study what they read. Open a PDF, EPUB or text file, then highlight, annotate, translate and revise.</p>
+
+          <dl class="qa mb-5">
+            <div><dt>Solves</dt><dd>Reading, notes and revision in one place instead of three.</dd></div>
+            <div><dt>Built</dt><dd>My own EPUB 2/3 parser, a PDF pipeline, on-device OCR for scans, highlights that turn into spaced-repetition flashcards, a notes and writing workspace, and AI explanations through a Cloud Function.</dd></div>
+            <div><dt>Interesting</dt><dd>The page curl is physics in custom GLSL shaders. OCR reads Latin and Devanāgarī on the device, so scans never leave the phone.</dd></div>
+          </dl>
 
           <!-- Reader interaction sketch -->
           <div class="rounded-2xl border border-border bg-surface2/60 p-4 mb-5" data-reader>
@@ -312,14 +424,14 @@
             </div>
           </div>
 
-          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">Next.js</li><li class="chip">Firebase</li></ul>
+          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">Flutter</li><li class="chip">Dart</li><li class="chip">Drift</li><li class="chip">Firebase</li><li class="chip">ML Kit</li></ul>
           <div class="mt-auto">
             <a href="https://ebookpro.web.app" target="_blank" rel="noopener noreferrer" class="btn btn-sm w-full bg-teal/10 border border-teal/25 text-teal-ink hover:bg-teal/20">
               Open Ebook Pro <span class="sr-only">(opens in a new tab)</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
             <div class="flex justify-between items-center px-1 mt-1">
-              <a href="https://ebookpro.hycyon.com" target="_blank" rel="noopener noreferrer" class="link-quiet">Ebook Pro site<span class="sr-only"> (opens in a new tab)</span></a>
+              <a href="https://ebookpro.hycyon.com" target="_blank" rel="noopener noreferrer" class="link-quiet">Product site<span class="sr-only"> (opens in a new tab)</span></a>
               <a href="https://ebookpro.hycyon.com/privacy" target="_blank" rel="noopener noreferrer" class="link-quiet">Privacy policy<span class="sr-only"> (opens in a new tab)</span></a>
             </div>
           </div>
@@ -434,7 +546,7 @@
               <p class="meta-label mb-1">2022–Present · Building</p>
               <h3 class="story-title font-display font-bold text-lg sm:text-xl">From studying to building</h3>
               <div class="story-extra"><div>
-                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Coursework turned into products: web apps, native iOS, and AI/ML experiments. Skills only count once something is built with them, so I started building.</p>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">Coursework turned into products: web apps, Android and iOS, and AI-assisted tools. Skills only count once something is built with them, so I started building.</p>
                 <p class="mt-3"><a href="#capabilities" class="text-sm font-bold text-accent-ink underline decoration-accent/30 underline-offset-4 inline-block py-2">See capabilities →</a></p>
               </div></div>
             </div>
@@ -458,7 +570,7 @@
               <p class="meta-label mb-1">Company · Founder</p>
               <h3 class="story-title font-display font-bold text-lg sm:text-xl">Hycyon</h3>
               <div class="story-extra"><div>
-                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">A Udyam-registered MSME that I founded, and the home for my products and services.</p>
+                <p class="text-sm md:text-base text-textmuted mt-3 leading-relaxed font-medium">A technology and product studio that I founded, and the home for my products and services. It’s a Udyam-registered MSME.</p>
                 <p class="mt-3"><a href="#hycyon" class="text-sm font-bold text-accent-ink underline decoration-accent/30 underline-offset-4 inline-block py-2">How it connects →</a></p>
               </div></div>
             </div>
@@ -484,56 +596,86 @@
   <!-- ═════════════ 5 · WHAT CAN HE DO ═════════════ -->
   <section id="capabilities" aria-labelledby="cap-title" class="relative py-20 sm:py-28 px-4 sm:px-6 z-10">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12 sm:mb-16 reveal">
+      <div class="text-center mb-10 sm:mb-12 reveal">
         <span class="eyebrow eyebrow-accent">CAPABILITIES</span>
         <h2 id="cap-title" class="section-title mb-4">What I can build with you</h2>
-        <p class="section-lede mx-auto">Six areas of work. The tools sit underneath each one because the problem should come first.</p>
+        <p class="section-lede mx-auto">Six areas, each backed by a product above. The tools come last because the problem comes first.</p>
       </div>
 
-      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0">
-        <li class="card p-6 sm:p-7 reveal" data-spotlight>
+      <!-- Product rail: pick a product to see which capabilities it proves (enhanced by JS) -->
+      <div class="cap-rail reveal" role="group" aria-label="Highlight capabilities by product" hidden data-cap-rail>
+        <span class="meta-label">Show what each product proves</span>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button type="button" class="rail-pill" data-product="vaak" aria-pressed="false">VaakBoard</button>
+          <button type="button" class="rail-pill" data-product="brain" aria-pressed="false">BrainSparkOS</button>
+          <button type="button" class="rail-pill" data-product="ebook" aria-pressed="false">Ebook Pro</button>
+        </div>
+      </div>
+
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0 m-0" data-cap-grid>
+        <li class="card cap p-6 sm:p-7 reveal" data-spotlight data-products="vaak brain ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">01 · Product engineering</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Idea to production</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Complete digital products: design, build, launch and run.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#brainspark">BrainSparkOS</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
-          <p class="font-mono text-[11px] text-textmuted">Swift · React · Next.js · Firebase</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Whole products, concept to release</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Architecture, design, engineering, tests and deployment, for each product on this page.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#vaakboard">VaakBoard</a></li><li><a href="#brainspark">BrainSparkOS</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Flutter · Swift · Firebase</p>
         </li>
-        <li class="card p-6 sm:p-7 reveal delay-100" data-spotlight>
+        <li class="card cap p-6 sm:p-7 reveal delay-100" data-spotlight data-products="vaak ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">02 · Mobile</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Native iOS</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Native apps and keyboard extensions, built for iOS.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a></p>
-          <p class="font-mono text-[11px] text-textmuted">Swift · UIKit · SwiftUI · App Extensions · CoreData</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Native iOS and Flutter apps</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">A Swift keyboard extension for iOS. A Flutter reader built for Android.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#vaakboard">VaakBoard</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Swift · Keyboard extension · Flutter · Dart</p>
         </li>
-        <li class="card p-6 sm:p-7 reveal delay-200" data-spotlight>
+        <li class="card cap p-6 sm:p-7 reveal delay-200" data-spotlight data-products="vaak brain ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">03 · Web</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Web applications</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Interactive web apps and platforms that are quick to load and easy to use.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#brainspark">BrainSparkOS</a>, <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
-          <p class="font-mono text-[11px] text-textmuted">React · Next.js · Node.js</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Web apps and fast static sites</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Flutter web apps, and plain static pages like this one, with no framework in the way.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#vaakboard">VaakBoard web demo</a></li><li><a href="#brainspark">BrainSparkOS</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Flutter Web · HTML · CSS · JavaScript · Tailwind</p>
         </li>
-        <li class="card p-6 sm:p-7 reveal" data-spotlight>
+        <li class="card cap p-6 sm:p-7 reveal" data-spotlight data-products="brain ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">04 · AI / computational systems</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Intelligent tooling</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">AI-powered tools, retrieval workflows and computational systems.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a>: AI explanations, OCR, translation</p>
-          <p class="font-mono text-[11px] text-textmuted">Python · TensorFlow · PyTorch · RAG</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">AI features, keys kept server-side</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Gemini behind Cloud Functions for tutoring and explanations. OCR that runs on the device.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#brainspark">BrainSparkOS</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Google Gemini · Cloud Functions · ML Kit</p>
         </li>
-        <li class="card p-6 sm:p-7 reveal delay-100" data-spotlight>
+        <li class="card cap p-6 sm:p-7 reveal delay-100" data-spotlight data-products="vaak ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">05 · Language technology</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Sanskrit in software</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Transliteration, text processing and language-focused software.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#vaakboard">VaakBoard</a>: custom trie engine, offline lexicon</p>
-          <p class="font-mono text-[11px] text-textmuted">Swift · IAST · Devanāgarī</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">Scripts, sounds and structure</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">A tested engine from Latin and IAST to Devanāgarī. Devanāgarī OCR inside a reader.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#vaakboard">VaakBoard</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Custom trie · IAST · Devanāgarī · ML Kit</p>
         </li>
-        <li class="card p-6 sm:p-7 reveal delay-200" data-spotlight>
+        <li class="card cap p-6 sm:p-7 reveal delay-200" data-spotlight data-products="brain ebook" tabindex="-1">
           <p class="meta-label mb-3 text-accent-ink">06 · Infrastructure</p>
-          <h3 class="font-display font-bold text-xl text-textmain mb-2">Data &amp; deployment</h3>
-          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">The databases, hosting and production setup behind the products.</p>
-          <p class="text-xs text-textmuted font-medium mb-4">Seen in <a class="font-bold text-textmain underline decoration-border underline-offset-4" href="#ebookpro">Ebook Pro</a></p>
-          <p class="font-mono text-[11px] text-textmuted">Firebase · PostgreSQL</p>
+          <h3 class="font-display font-bold text-xl text-textmain mb-2">The backend behind the product</h3>
+          <p class="text-textmuted text-sm leading-relaxed font-medium mb-5">Sign-in, data, functions, hosting and secrets, set up so the product keeps working.</p>
+          <p class="cap-label">Proof</p>
+          <ul class="proof-list"><li><a href="#brainspark">BrainSparkOS</a></li><li><a href="#ebookpro">Ebook Pro</a></li></ul>
+          <p class="cap-stack">Firebase · Firestore · Drift · Secret Manager</p>
         </li>
       </ul>
+
+      <!-- Product lifecycle -->
+      <div class="mt-12 sm:mt-14 reveal">
+        <p class="meta-label text-center mb-5">How I work on a product, end to end</p>
+        <ol class="life list-none p-0 m-0" aria-label="Product lifecycle">
+          <li><span>1</span>Idea</li>
+          <li><span>2</span>Architecture</li>
+          <li><span>3</span>Design</li>
+          <li><span>4</span>Engineering</li>
+          <li><span>5</span>Testing</li>
+          <li><span>6</span>Deployment</li>
+          <li><span>7</span>Product</li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -563,7 +705,7 @@
           <li class="chain-node lg:flex-1" data-chain-node="company">
             <p class="meta-label mb-1">The company</p>
             <p class="font-display font-bold text-lg text-textmain">Hycyon</p>
-            <p class="text-sm text-textmuted font-medium mt-1">Udyam-registered MSME</p>
+            <p class="text-sm text-textmuted font-medium mt-1">Technology &amp; product studio</p>
           </li>
           <li aria-hidden="true" class="chain-link"></li>
           <li class="chain-node lg:flex-[1.3]" data-chain-node="outputs">
@@ -573,16 +715,19 @@
               <li><a href="#brainspark" class="chip inline-flex items-center min-h-[36px] hover:border-accent hover:text-textmain">BrainSparkOS</a></li>
               <li><a href="#ebookpro" class="chip inline-flex items-center min-h-[36px] hover:border-accent hover:text-textmain">Ebook Pro</a></li>
             </ul>
-            <p class="text-sm text-textmuted font-medium mt-3">Services: full-stack web development and AI integrations.</p>
+            <p class="text-sm text-textmuted font-medium mt-3">Services: websites, web and mobile apps, custom software and AI systems.</p>
           </li>
         </ol>
 
         <div class="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p class="text-sm text-textmuted font-medium max-w-xl">Looking for the company, rather than the person? Hycyon has its own pages.</p>
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <a href="https://catalogue.hycyon.com/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm w-full sm:w-auto">Service catalogue <span class="sr-only">(opens in a new tab)</span></a>
           <a href="https://hycyon.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm w-full sm:w-auto">
-            Visit the company site <span class="sr-only">(opens in a new tab)</span>
+            Visit Hycyon <span class="sr-only">(opens in a new tab)</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
+          </div>
         </div>
       </div>
     </div>
