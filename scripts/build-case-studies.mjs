@@ -88,7 +88,7 @@ const page = (c) => {
     <aside class="cs-more" aria-labelledby="more-h">
       <h2 id="more-h">More case studies</h2>
       <ul>${c.next.map((n) => `<li><a href="../${n}/"><strong>${esc(bySlug[n].name)}</strong><span>${esc(bySlug[n].status.label)}</span></a></li>`).join('')}</ul>
-      <p class="cs-end">Building something like this? <a href="https://catalogue.hycyon.com/#quote-section">Start a project with Hycyon</a> or <a href="../../#contact">write to me directly</a>.</p>
+      <p class="cs-end">Building something like this? <a href="https://catalogue.hycyon.com/#quote">Start a project with Hycyon</a> or <a href="../../#contact">write to me directly</a>.</p>
     </aside>
   </main>
   <footer class="cs-foot"><p>© 2026 Abhishek Sharma · <a href="https://hycyon.com/">Hycyon</a></p></footer>
