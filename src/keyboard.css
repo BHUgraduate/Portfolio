@@ -1,0 +1,90 @@
+/* Styles for sanskrit-keyboard.html. Compiled with tailwind.keyboard.config.js into assets/css/keyboard.css (npm run build). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Auto Light/Dark System */
+:root {
+  /* Light Mode */
+  --app-bg: #F1F5F9;
+  --panel-bg: #FFFFFF;
+  --key-bg: #FFFFFF;
+  --key-bg-press: #E2E8F0;
+  --key-special: #CBD5E1;
+  --key-special-press: #94A3B8;
+  --border-main: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --accent: #4F46E5;
+  --accent-ink: #4F46E5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode */
+    --app-bg: #080C14;
+    --panel-bg: #141E30;
+    --key-bg: #475569;
+    --key-bg-press: #334155;
+    --key-special: #1E293B;
+    --key-special-press: #0F172A;
+    --border-main: #1E2D45;
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    --accent: #4F46E5;
+    --accent-ink: #A5B4FC;
+  }
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--text-main);
+  touch-action: manipulation; /* Prevents double-tap zoom */
+  overflow: hidden; /* Lock viewport for app feel */
+}
+
+/* Output Editor Styles */
+#editor {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+#editor:empty:before {
+  content: attr(data-placeholder);
+  color: var(--text-muted);
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--accent);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Key Interactions */
+.vk-key {
+  transition: background-color 0.1s, transform 0.05s;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.vk-key:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+/* Transliteration Preview (live buffer) */
+.live-buffer {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-decoration-color: rgba(99, 102, 241, 0.4);
+  text-underline-offset: 4px;
+}
+
+/* Keyboard focus: always visible, on every control (keys, mode buttons, links). */
+:focus-visible {
+  outline: 3px solid var(--accent-ink);
+  outline-offset: 2px;
+}
