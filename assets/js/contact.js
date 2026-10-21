@@ -1,4 +1,20 @@
 const EMAIL = 'bhugraduate@gmail.com';
+// Hycyon's form relay (hycyon/relay on Netlify). If it cannot be reached, the form falls back to an email draft.
+const FORMS_ENDPOINT = 'https://hycyon-forms.netlify.app/api/lead';
+
+/** Sends the message to the relay. Never throws: resolves true only when it was delivered. */
+async function sendToRelay(payload) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 8000);
+  try {
+    const res = await fetch(FORMS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: ctl.signal, credentials: 'omit' });
+    return res.ok;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 const PROMPTS = {
   'A product': 'What does it do, who is it for, and where are you in the process?',
@@ -55,7 +71,7 @@ export function initContact() {
     f.addEventListener('input', () => { if (f.getAttribute('aria-invalid') === 'true') validate(f); });
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
     if (!data.get('intent')) { setStatus('error', 'Pick what you’re building first.'); return; }
@@ -64,10 +80,24 @@ export function initContact() {
     const name = String(data.get('name')).trim();
     const email = String(data.get('email')).trim();
     const intent = String(data.get('intent'));
+    const message = String(data.get('message')).trim();
     const subject = `${intent} — ${name} (via portfolio)`;
-    const body = `${String(data.get('message')).trim()}\n\n— ${name}\n${email}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('success', `Your email app should now show a draft. If it doesn’t, write to ${EMAIL} directly.`);
+    const body = `${message}\n\n— ${name}\n${email}`;
+
+    const send = form.querySelector('[data-send]');
+    const label = send.textContent;
+    send.disabled = true; send.textContent = 'Sending…';
+    const delivered = await sendToRelay({ source: 'portfolio', intent, name, email, message, website: String(data.get('website') || '') });
+    send.disabled = false; send.textContent = label;
+
+    if (delivered) {
+      setStatus('success', `Thank you, ${name.split(' ')[0]}. Your message reached me, and I’ll reply to ${email}.`);
+      msg.value = '';
+    } else {
+      // Not delivered: hand them an email draft so the message is not lost.
+      window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setStatus('success', `I couldn’t send it from this page, so your email app should now show a draft. If it doesn’t, write to ${EMAIL} directly.`);
+    }
   });
 
   const copy = document.querySelector('[data-copy-email]');
