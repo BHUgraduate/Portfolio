@@ -2,34 +2,25 @@ const EMAIL = 'bhugraduate@gmail.com';
 // Hycyon's form relay (hycyon/relay on Netlify). If it cannot be reached, the form falls back to an email draft.
 const FORMS_ENDPOINT = 'https://hycyon-forms.netlify.app/api/lead';
 
-/** Sends the message to the relay. Never throws: resolves true only when it was delivered. */
+/**
+ * Sends the message to the relay. Never throws. Resolves { ok: true } when it was delivered, otherwise { ok: false, reason }
+ * where reason is the relay's short code (forbidden, invalid, rate_limited, delivery_failed, ...) or 'network' / 'timeout' /
+ * 'http_<status>'. The reason is shown so a failure is diagnosable at a glance.
+ */
 async function sendToRelay(payload) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 8000);
   try {
     const res = await fetch(FORMS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: ctl.signal, credentials: 'omit' });
-    return res.ok;
-  } catch {
-    return false;
+    if (res.ok) return { ok: true };
+    const body = await res.json().catch(() => null);
+    return { ok: false, reason: (body && body.code) || `http_${res.status}` };
+  } catch (err) {
+    return { ok: false, reason: err && err.name === 'AbortError' ? 'timeout' : 'network' };
   } finally {
     clearTimeout(timer);
   }
 }
-
-const PROMPTS = {
-  'A product': 'What does it do, who is it for, and where are you in the process?',
-  'A website / platform': 'What should the site or platform do, and for whom?',
-  'A mobile app': 'What should the app do? iOS, or something else?',
-  'Something experimental': 'What’s the idea you want to try?',
-  'A technical partner': 'What are you building, and what kind of technical help do you need?',
-  'Collaboration': 'What would you like us to work on together?',
-};
-
-const MESSAGES = {
-  name: { valueMissing: 'Please tell me your name.' },
-  email: { valueMissing: 'Please add your email so I can reply.', typeMismatch: 'That doesn’t look like an email address.' },
-  message: { valueMissing: 'Say a little about what you’re working on.' },
-};
 
 export function initContact() {
   const form = document.getElementById('contact-form');
@@ -87,16 +78,16 @@ export function initContact() {
     const send = form.querySelector('[data-send]');
     const label = send.textContent;
     send.disabled = true; send.textContent = 'Sending…';
-    const delivered = await sendToRelay({ source: 'portfolio', intent, name, email, message, website: String(data.get('website') || '') });
+    const result = await sendToRelay({ source: 'portfolio', intent, name, email, message, website: String(data.get('website') || '') });
     send.disabled = false; send.textContent = label;
 
-    if (delivered) {
+    if (result.ok) {
       setStatus('success', `Thank you, ${name.split(' ')[0]}. Your message reached me, and I’ll reply to ${email}.`);
       msg.value = '';
     } else {
       // Not delivered: hand them an email draft so the message is not lost.
       window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      setStatus('success', `I couldn’t send it from this page, so your email app should now show a draft. If it doesn’t, write to ${EMAIL} directly.`);
+      setStatus('success', `I couldn’t send it from this page (reason: ${result.reason}), so your email app should now show a draft. If it doesn’t, write to ${EMAIL} directly.`);
     }
   });
 
