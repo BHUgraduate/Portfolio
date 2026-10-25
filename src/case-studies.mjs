@@ -284,4 +284,94 @@ export const caseStudies = [
     ],
     next: ['ebook-pro', 'vaakboard'],
   },
+
+  {
+    slug: 'audioforensics-lab',
+    name: 'AudioForensics Lab',
+    kicker: 'Client case study',
+    status: { key: 'client', label: 'Client project' },
+    title: 'AudioForensics Lab: examining WAV evidence',
+    description:
+      'A tool for examining WAV audio evidence: integrity hashing, header checks, spectrograms and filtering of a derived copy, with a processing history and report.',
+    summary:
+      'A WAV file offered as evidence has to be examined without being altered, and every step has to be reproducible. This study covers how the tool is built around that, what is tested, and what it deliberately does not claim.',
+    facts: [
+      ['Client', 'Not named here'],
+      ['Role', 'Design and engineering'],
+      ['Stack', 'Python, Streamlit, NumPy, SciPy, librosa, soundfile, Matplotlib, mutagen'],
+      ['Method', 'Deterministic signal processing only: no AI or machine learning'],
+    ],
+    links: [],
+    sections: [
+      {
+        id: 'purpose',
+        title: 'What it does',
+        text: ['A web tool for examining digital audio evidence in WAV format. An examiner uploads a file and works through numbered sections: evidence information, cryptographic integrity, metadata, waveform, spectrogram, optional enhancement, playback and export, a processing history, and a report.'],
+      },
+      {
+        id: 'integrity',
+        title: 'Integrity first',
+        text: ['The tool treats the file as evidence before it treats it as sound.'],
+        list: [
+          'Two hashes, each in MD5 and SHA-256: one of the whole file, one of the audio data alone, so editing only metadata changes the first and not the second.',
+          'A header cross-check: every claim the WAV header makes (sample rate, channels, bit depth, sizes, frame count, duration) is compared with the audio actually present and an independent decoder, and reported as pass, warning or fail.',
+          'Hash verification with three states (verified, failed, not verified) that is stated at the top of every report. A report cannot be finalised on a failed or unverified status unless the examiner acknowledges it, and the report then says so.',
+        ],
+      },
+      {
+        id: 'analysis',
+        title: 'Looking at the signal',
+        text: ['Waveform, spectrogram and an optional magnitude spectrum, with the controls an examiner needs (channel, FFT size, window, overlap, frequency and display range). Long recordings are drawn as a min/max envelope so a single-sample click is never averaged away. Each plot carries a caption stating exactly how it was made.'],
+      },
+      {
+        id: 'enhancement',
+        title: 'Enhancement on a copy',
+        text: ['Butterworth high-pass and low-pass filters (zero-phase or causal) and peak normalization are applied to a derived copy; the original is never touched. The settings are validated live against the Nyquist frequency, and the original and enhanced copy can be played side by side. The enhanced copy can be exported as 16-bit, 24-bit or 32-bit float WAV, which is re-opened and checked before the download is offered, and a format that would clip is blocked with the reason.'],
+      },
+      {
+        id: 'record',
+        title: 'History and report',
+        text: ['Everything done to the evidence is recorded in an append-only history with UTC times and parameters, downloadable as JSON. The report is a Markdown document that records what the software did and measured and makes no finding about authenticity. It is reproducible byte for byte and shows its own SHA-256. Text from the file (names, tags, notes) cannot inject formatting into it; that is checked with a real CommonMark parser.'],
+      },
+      {
+        id: 'decisions',
+        title: 'Engineering decisions',
+        list: [
+          'Deterministic processing only. Every step is a classical algorithm, so the same input and settings give the same output, which is what an examination needs.',
+          'Refuse rather than guess. An unreadable file, an unknown encoding, a cutoff above Nyquist or a recording over a size limit produces a plain message, never a traceback or a silent approximation.',
+          'No module writes to disk. The evidence lives in memory for the session, and the examiner chooses what to download.',
+          'Channels are called Channel 1 and Channel 2, never left and right, because a WAV file does not say which is which.',
+        ],
+      },
+      {
+        id: 'verification',
+        title: 'How it is checked',
+        text: [
+          'The automated suite has more than 500 tests, including filter responses compared with the exact analytic Butterworth response, exports decoded by two independent readers, and whole-pipeline runs across many encodings, channel counts and awkward signals such as silence, clipping and NaN.',
+          'The page itself is covered by a manual QA checklist for a real browser, not by the automated tests. The suite runs on Linux; Windows and macOS rely on that checklist, and one real run on Windows is recorded.',
+        ],
+      },
+      {
+        id: 'limits',
+        title: 'What it does not do',
+        list: [
+          'WAV only, one file at a time, held in memory; there is no case storage.',
+          'No authenticity classification, no splice or edit detection, no speaker identification, and no finding in the report. A hash match shows byte-identity with a reference value, not chain of custody.',
+          'A small enhancement toolbox: no notch, band-pass, de-noising or de-clipping.',
+          'A local, single-user tool without authentication, not hardened for a shared public server.',
+        ],
+      },
+      {
+        id: 'result',
+        title: 'Result',
+        text: ['The tool is complete as specified and its behaviour is documented and tested. No usage figures or outcomes are claimed here, and none are invented.'],
+      },
+      {
+        id: 'next',
+        title: 'Planned, not built',
+        list: ['PDF or HTML reports with embedded figures.', 'Digital signing or timestamping of reports.', 'Case management with persistent storage.', 'A notch or band-pass filter and saved presets.', 'Automated browser tests for the page itself.'],
+      },
+    ],
+    next: ['irons-irony', 'vaakboard'],
+  },
 ];

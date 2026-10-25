@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AudioForensics Lab: examining WAV evidence — Abhishek Sharma</title>
+  <meta name="description" content="A tool for examining WAV audio evidence: integrity hashing, header checks, spectrograms and filtering of a derived copy, with a processing history and report.">
+  <meta name="author" content="Abhishek Sharma">
+  <meta name="theme-color" content="#080C14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://portfolio.hycyon.com/case-studies/audioforensics-lab/">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Abhishek Sharma">
+  <meta property="og:title" content="AudioForensics Lab: examining WAV evidence">
+  <meta property="og:description" content="A WAV file offered as evidence has to be examined without being altered, and every step has to be reproducible. This study covers how the tool is built around that, what is tested, and what it deliberately does not claim.">
+  <meta property="og:url" content="https://portfolio.hycyon.com/case-studies/audioforensics-lab/">
+  <meta property="og:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AudioForensics Lab: examining WAV evidence">
+  <meta name="twitter:description" content="A WAV file offered as evidence has to be examined without being altered, and every step has to be reproducible. This study covers how the tool is built around that, what is tested, and what it deliberately does not claim.">
+  <meta name="twitter:image" content="https://portfolio.hycyon.com/assets/img/og-image.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AudioForensics Lab: examining WAV evidence","description":"A tool for examining WAV audio evidence: integrity hashing, header checks, spectrograms and filtering of a derived copy, with a processing history and report.","url":"https://portfolio.hycyon.com/case-studies/audioforensics-lab/","inLanguage":"en","author":{"@type":"Person","name":"Abhishek Sharma","url":"https://portfolio.hycyon.com/"},"publisher":{"@type":"Organization","name":"Hycyon","url":"https://hycyon.com"},"image":"https://portfolio.hycyon.com/assets/img/og-image.jpg"}</script>
+  <link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" crossorigin>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <link rel="stylesheet" href="../../assets/css/case.css">
+</head>
+<body class="antialiased font-sans">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="cs-bar">
+    <nav class="cs-nav" aria-label="Primary">
+      <a class="cs-home" href="../../">Abhishek Sharma</a>
+      <a href="../../#work">All work</a>
+      <a href="../../#contact" class="cs-cta">Get in touch</a>
+    </nav>
+  </header>
+  <main id="main">
+    <article>
+      <header class="cs-hero">
+        <p class="cs-kicker">Client case study</p>
+        <h1>AudioForensics Lab: examining WAV evidence</h1>
+        <p class="cs-lede">A WAV file offered as evidence has to be examined without being altered, and every step has to be reproducible. This study covers how the tool is built around that, what is tested, and what it deliberately does not claim.</p>
+        <p class="cs-status"><span class="cs-dot client" aria-hidden="true"></span>Client project</p>
+        <dl class="cs-facts"><div><dt>Client</dt><dd>Not named here</dd></div><div><dt>Role</dt><dd>Design and engineering</dd></div><div><dt>Stack</dt><dd>Python, Streamlit, NumPy, SciPy, librosa, soundfile, Matplotlib, mutagen</dd></div><div><dt>Method</dt><dd>Deterministic signal processing only: no AI or machine learning</dd></div></dl>
+        <p class="cs-links"></p>
+      </header>
+      <nav class="cs-toc" aria-label="In this case study"><ol><li><a href="#purpose">What it does</a></li><li><a href="#integrity">Integrity first</a></li><li><a href="#analysis">Looking at the signal</a></li><li><a href="#enhancement">Enhancement on a copy</a></li><li><a href="#record">History and report</a></li><li><a href="#decisions">Engineering decisions</a></li><li><a href="#verification">How it is checked</a></li><li><a href="#limits">What it does not do</a></li><li><a href="#result">Result</a></li><li><a href="#next">Planned, not built</a></li></ol></nav>
+      
+<section class="cs-section" id="purpose" aria-labelledby="purpose-h">
+  <p class="cs-no" aria-hidden="true">01</p>
+  <div class="cs-body"><h2 id="purpose-h">What it does</h2><p>A web tool for examining digital audio evidence in WAV format. An examiner uploads a file and works through numbered sections: evidence information, cryptographic integrity, metadata, waveform, spectrogram, optional enhancement, playback and export, a processing history, and a report.</p></div>
+</section>
+<section class="cs-section" id="integrity" aria-labelledby="integrity-h">
+  <p class="cs-no" aria-hidden="true">02</p>
+  <div class="cs-body"><h2 id="integrity-h">Integrity first</h2><p>The tool treats the file as evidence before it treats it as sound.</p><ul><li>Two hashes, each in MD5 and SHA-256: one of the whole file, one of the audio data alone, so editing only metadata changes the first and not the second.</li><li>A header cross-check: every claim the WAV header makes (sample rate, channels, bit depth, sizes, frame count, duration) is compared with the audio actually present and an independent decoder, and reported as pass, warning or fail.</li><li>Hash verification with three states (verified, failed, not verified) that is stated at the top of every report. A report cannot be finalised on a failed or unverified status unless the examiner acknowledges it, and the report then says so.</li></ul></div>
+</section>
+<section class="cs-section" id="analysis" aria-labelledby="analysis-h">
+  <p class="cs-no" aria-hidden="true">03</p>
+  <div class="cs-body"><h2 id="analysis-h">Looking at the signal</h2><p>Waveform, spectrogram and an optional magnitude spectrum, with the controls an examiner needs (channel, FFT size, window, overlap, frequency and display range). Long recordings are drawn as a min/max envelope so a single-sample click is never averaged away. Each plot carries a caption stating exactly how it was made.</p></div>
+</section>
+<section class="cs-section" id="enhancement" aria-labelledby="enhancement-h">
+  <p class="cs-no" aria-hidden="true">04</p>
+  <div class="cs-body"><h2 id="enhancement-h">Enhancement on a copy</h2><p>Butterworth high-pass and low-pass filters (zero-phase or causal) and peak normalization are applied to a derived copy; the original is never touched. The settings are validated live against the Nyquist frequency, and the original and enhanced copy can be played side by side. The enhanced copy can be exported as 16-bit, 24-bit or 32-bit float WAV, which is re-opened and checked before the download is offered, and a format that would clip is blocked with the reason.</p></div>
+</section>
+<section class="cs-section" id="record" aria-labelledby="record-h">
+  <p class="cs-no" aria-hidden="true">05</p>
+  <div class="cs-body"><h2 id="record-h">History and report</h2><p>Everything done to the evidence is recorded in an append-only history with UTC times and parameters, downloadable as JSON. The report is a Markdown document that records what the software did and measured and makes no finding about authenticity. It is reproducible byte for byte and shows its own SHA-256. Text from the file (names, tags, notes) cannot inject formatting into it; that is checked with a real CommonMark parser.</p></div>
+</section>
+<section class="cs-section" id="decisions" aria-labelledby="decisions-h">
+  <p class="cs-no" aria-hidden="true">06</p>
+  <div class="cs-body"><h2 id="decisions-h">Engineering decisions</h2><ul><li>Deterministic processing only. Every step is a classical algorithm, so the same input and settings give the same output, which is what an examination needs.</li><li>Refuse rather than guess. An unreadable file, an unknown encoding, a cutoff above Nyquist or a recording over a size limit produces a plain message, never a traceback or a silent approximation.</li><li>No module writes to disk. The evidence lives in memory for the session, and the examiner chooses what to download.</li><li>Channels are called Channel 1 and Channel 2, never left and right, because a WAV file does not say which is which.</li></ul></div>
+</section>
+<section class="cs-section" id="verification" aria-labelledby="verification-h">
+  <p class="cs-no" aria-hidden="true">07</p>
+  <div class="cs-body"><h2 id="verification-h">How it is checked</h2><p>The automated suite has more than 500 tests, including filter responses compared with the exact analytic Butterworth response, exports decoded by two independent readers, and whole-pipeline runs across many encodings, channel counts and awkward signals such as silence, clipping and NaN.</p><p>The page itself is covered by a manual QA checklist for a real browser, not by the automated tests. The suite runs on Linux; Windows and macOS rely on that checklist, and one real run on Windows is recorded.</p></div>
+</section>
+<section class="cs-section" id="limits" aria-labelledby="limits-h">
+  <p class="cs-no" aria-hidden="true">08</p>
+  <div class="cs-body"><h2 id="limits-h">What it does not do</h2><ul><li>WAV only, one file at a time, held in memory; there is no case storage.</li><li>No authenticity classification, no splice or edit detection, no speaker identification, and no finding in the report. A hash match shows byte-identity with a reference value, not chain of custody.</li><li>A small enhancement toolbox: no notch, band-pass, de-noising or de-clipping.</li><li>A local, single-user tool without authentication, not hardened for a shared public server.</li></ul></div>
+</section>
+<section class="cs-section" id="result" aria-labelledby="result-h">
+  <p class="cs-no" aria-hidden="true">09</p>
+  <div class="cs-body"><h2 id="result-h">Result</h2><p>The tool is complete as specified and its behaviour is documented and tested. No usage figures or outcomes are claimed here, and none are invented.</p></div>
+</section>
+<section class="cs-section" id="next" aria-labelledby="next-h">
+  <p class="cs-no" aria-hidden="true">10</p>
+  <div class="cs-body"><h2 id="next-h">Planned, not built</h2><ul><li>PDF or HTML reports with embedded figures.</li><li>Digital signing or timestamping of reports.</li><li>Case management with persistent storage.</li><li>A notch or band-pass filter and saved presets.</li><li>Automated browser tests for the page itself.</li></ul></div>
+</section>
+    </article>
+    <aside class="cs-more" aria-labelledby="more-h">
+      <h2 id="more-h">More case studies</h2>
+      <ul><li><a href="../irons-irony/"><strong>iron's irony</strong><span>Client project</span></a></li><li><a href="../vaakboard/"><strong>VaakBoard</strong><span>iOS keyboard coming soon · engine and web demo working</span></a></li></ul>
+      <p class="cs-end">Building something like this? <a href="https://catalogue.hycyon.com/#quote">Start a project with Hycyon</a> or <a href="../../#contact">write to me directly</a>.</p>
+    </aside>
+  </main>
+  <footer class="cs-foot"><p>© 2026 Abhishek Sharma · <a href="https://hycyon.com/">Hycyon</a></p></footer>
+</body>
+</html>
