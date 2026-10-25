@@ -11,7 +11,7 @@ export const caseStudies = [
     status: { key: 'live', label: 'Web live · Android in preparation' },
     title: 'eBook Pro: turning reading into knowledge',
     description:
-      'How eBook Pro was engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB 2/3 parser, on-device OCR and translation, and a server-enforced quota.',
+      'How eBook Pro was engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB parser, on-device OCR and translation, and a server-enforced quota.',
     summary:
       'A reader for people who study what they read. The case study covers why it is a local-first Flutter app, the three hardest engineering problems, and what the product still does not do.',
     facts: [
