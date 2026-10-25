@@ -5,8 +5,9 @@
   "scripts": {
     "build": "tailwindcss -c tailwind.config.js -i src/styles.css -o assets/css/site.css --minify && tailwindcss -c tailwind.keyboard.config.js -i src/keyboard.css -o assets/css/keyboard.css --minify",
     "watch": "tailwindcss -c tailwind.config.js -i src/styles.css -o assets/css/site.css --watch",
-    "test": "node scripts/build-case-studies.mjs && node --test \"tests/*.test.mjs\"",
-    "cases": "node scripts/build-case-studies.mjs"
+    "test": "node scripts/build-case-studies.mjs && node scripts/build-sitemap.mjs && node --test \"tests/*.test.mjs\"",
+    "cases": "node scripts/build-case-studies.mjs",
+    "sitemap": "node scripts/build-sitemap.mjs"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
