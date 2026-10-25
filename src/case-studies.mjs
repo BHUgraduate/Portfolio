@@ -11,7 +11,7 @@ export const caseStudies = [
     status: { key: 'live', label: 'Web live · Android in preparation' },
     title: 'eBook Pro: turning reading into knowledge',
     description:
-      'How eBook Pro was designed and engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB 2/3 parser, on-device OCR and translation, and a server-enforced cloud quota.',
+      'How eBook Pro was engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB 2/3 parser, on-device OCR and translation, and a server-enforced quota.',
     summary:
       'A reader for people who study what they read. The case study covers why it is a local-first Flutter app, the three hardest engineering problems, and what the product still does not do.',
     facts: [
@@ -221,7 +221,7 @@ export const caseStudies = [
     status: { key: 'client', label: 'Client project' },
     title: "iron's irony: a site for custom ironwork",
     description:
-      "How a website for a fabricator of gates, railings and staircases was designed around customer psychology, with an honest structure for real proof still to come.",
+      "How a website for a gate, railing and staircase fabricator was designed around customer psychology, with a structure ready for real proof still to come.",
     summary:
       'A fabricator whose work is custom and site-specific needed a way for people to start a conversation without a finished brief. This study covers the thinking and what exists; it does not claim results that have not been measured.',
     facts: [
