@@ -460,6 +460,26 @@
           </div>
         </article>
 
+
+        <!-- ───────── 05 · AudioForensics Lab (client) ───────── -->
+        <article id="audioforensics" class="card proj lg:col-span-2 p-6 sm:p-8 reveal" style="--pc:#38BDF8" data-spotlight aria-labelledby="af-title">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mb-5">
+            <span class="proj-no">05</span>
+            <p class="meta-label">Client work · Digital audio evidence · Web app</p>
+            <span class="badge bg-accent/10 text-accent-ink border-border"><span class="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true"></span>Client project</span>
+          </div>
+          <h3 id="af-title" class="font-display font-bold text-3xl text-textmain mb-3">AudioForensics Lab</h3>
+          <p class="text-textmain text-base font-medium leading-relaxed mb-5 max-w-3xl">A tool for examining WAV audio evidence: hash the file, check its header, look at it as a waveform and spectrogram, filter a copy, and produce a report of what was done.</p>
+          <dl class="qa mb-5">
+            <div><dt>Solves</dt><dd>Evidence has to be examined without being altered, and every step has to be repeatable and on the record.</dd></div>
+            <div><dt>Built</dt><dd>Full-file and audio-payload hashes with a verification gate, a header cross-check, spectrograms, Butterworth filtering of a derived copy, an append-only history and a reproducible report.</dd></div>
+            <div><dt>Honest</dt><dd>Deterministic signal processing only, with no AI. It makes no finding about authenticity, runs as a local single-user tool, and its page is covered by a manual QA checklist.</dd></div>
+          </dl>
+          <ul class="flex flex-wrap gap-2 mb-6" aria-label="Technologies"><li class="chip">Python</li><li class="chip">Streamlit</li><li class="chip">NumPy</li><li class="chip">SciPy</li><li class="chip">librosa</li></ul>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="case-studies/audioforensics-lab/" class="btn btn-primary btn-sm">Read the case study</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
