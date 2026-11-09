@@ -8,7 +8,7 @@ export const caseStudies = [
     slug: 'ebook-pro',
     name: 'eBook Pro',
     kicker: 'Product case study',
-    status: { key: 'live', label: 'Web live · Android in preparation' },
+    status: { key: 'live', label: 'Live on the web and Google Play' },
     title: 'eBook Pro: turning reading into knowledge',
     description:
       'How eBook Pro was engineered: one coordinate pipeline for PDF text, OCR and search, an EPUB parser, on-device OCR and translation, and a server-enforced quota.',
@@ -18,11 +18,12 @@ export const caseStudies = [
       ['Role', 'Product, design and engineering'],
       ['Stack', 'Flutter, Dart, Drift, Firebase, Google ML Kit'],
       ['Version', '1.5.1 (build 9)'],
-      ['Links', 'ebookpro.hycyon.com · ebookpro.web.app'],
+      ['Links', 'ebookpro.hycyon.com · ebookpro.web.app · Google Play'],
     ],
     links: [
       ['Product site', 'https://ebookpro.hycyon.com/'],
       ['Open the web app', 'https://ebookpro.web.app/'],
+      ['Get it on Google Play', 'https://play.google.com/store/apps/details?id=com.hycyon.ebookpro'],
     ],
     sections: [
       {
@@ -111,7 +112,7 @@ export const caseStudies = [
         id: 'current-state',
         title: 'Current state and limits',
         list: [
-          'Web app: live. Android: in preparation. iOS has not been built in the development environment.',
+          'Web app: live. Android: live on Google Play. iOS has not been built in the development environment.',
           'OCR recognises Latin and Devanagari only. Hindi OCR was verified on an emulator with a generated page, not on a corpus of real scans.',
           'Publisher CSS, MathML typesetting, audio and video, and tappable in-text links in EPUBs are not supported.',
           'No download, rating or review figures are shown here because none have been verified.',
